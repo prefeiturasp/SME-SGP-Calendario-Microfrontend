@@ -350,7 +350,7 @@ const ReaberturaCadastro = () => {
 
   return (
     <Loader loading={processando}>
-      <Cabecalho pagina="Período de Fechamento (Reabertura)">
+      <Cabecalho pagina="Período de Fechamento (Reabertura) (Micro frontend)">
         <BotaoVoltar onClick={() => void voltar()} />
         <Botao
           id="SGP_BUTTON_CANCELAR"

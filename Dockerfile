@@ -4,8 +4,8 @@ WORKDIR /app
 RUN chown node:node /app
 USER node
 
-COPY --chown=node:node package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps --no-audit --no-fund
+COPY --chown=node:node package.json package-lock.json .npmrc ./
+RUN npm ci --no-audit --no-fund
 
 COPY --chown=node:node index.html tsconfig.json tsconfig.app.json tsconfig.node.json vite.config.ts .env.production ./
 COPY --chown=node:node scripts ./scripts

@@ -34,15 +34,18 @@ describe("Calendario", () => {
   });
 
   it.each([
-    ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar"],
-    ["/calendario-escolar/periodo-fechamento-abertura", "Período de Fechamento (Abertura)"],
+    ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar (Micro frontend)"],
+    [
+      "/calendario-escolar/periodo-fechamento-abertura",
+      "Período de Fechamento (Abertura) (Micro frontend)",
+    ],
     [
       "/calendario-escolar/periodo-fechamento-reabertura",
-      "Período de Fechamento (Reabertura)",
+      "Período de Fechamento (Reabertura) (Micro frontend)",
     ],
     [
       "/calendario-escolar/periodo-fechamento-reabertura/novo/15",
-      "Período de Fechamento (Reabertura)",
+      "Período de Fechamento (Reabertura) (Micro frontend)",
     ],
   ])("exibe %s", async (rota, titulo) => {
     renderizar(rota);

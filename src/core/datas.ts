@@ -1,9 +1,19 @@
 import dayjs, { type Dayjs } from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import localeData from "dayjs/plugin/localeData";
 import utc from "dayjs/plugin/utc";
+import weekday from "dayjs/plugin/weekday";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import weekYear from "dayjs/plugin/weekYear";
 import "dayjs/locale/pt-br";
 
 dayjs.extend(customParseFormat);
+dayjs.extend(advancedFormat);
+dayjs.extend(weekday);
+dayjs.extend(localeData);
+dayjs.extend(weekOfYear);
+dayjs.extend(weekYear);
 dayjs.extend(utc);
 dayjs.locale("pt-br");
 

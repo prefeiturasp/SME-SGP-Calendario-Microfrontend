@@ -182,7 +182,7 @@ const PeriodosEscolares = () => {
     >
       {(form) => (
         <>
-          <Cabecalho pagina="Cadastro do período escolar">
+          <Cabecalho pagina="Cadastro do período escolar (Micro frontend)">
             <BotaoVoltar onClick={() => void voltar(form)} />
             <Botao
               id="SGP_BUTTON_CANCELAR"

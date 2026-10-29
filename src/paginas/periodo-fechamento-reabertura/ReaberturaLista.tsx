@@ -200,7 +200,7 @@ const ReaberturaLista = () => {
 
   return (
     <>
-      <Cabecalho pagina="Período de Fechamento (Reabertura)">
+      <Cabecalho pagina="Período de Fechamento (Reabertura) (Micro frontend)">
         <BotaoVoltar onClick={() => navigate("/")} />
         <BotaoExcluir
           disabled={!permissoes?.podeExcluir || !selecionados.length}

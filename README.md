@@ -71,10 +71,12 @@ A ordem da URL é: prop `apiUrl` do host, depois `window.__ENV__.VITE_SGP_API` (
 Na raiz deste repositório:
 
 ```powershell
-npm install --legacy-peer-deps
+npm install
 copy .env.example .env
 npm run dev
 ```
+
+O `.npmrc` define `legacy-peer-deps=true`, o mesmo ajuste do Boletim. O `@reduxjs/toolkit` 1.9.7, versão usada pelo SGP, não declara compatibilidade com React 19, embora o host já rode essa combinação.
 
 O `dev` sobe o Vite na porta 5175. Para o artefato que o WebClient carrega (`remoteEntry.js`), use o build e o preview:
 

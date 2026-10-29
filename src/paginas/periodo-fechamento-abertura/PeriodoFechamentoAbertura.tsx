@@ -206,7 +206,7 @@ const PeriodoFechamentoAbertura = () => {
       >
         {(form) => (
           <>
-            <Cabecalho pagina="Período de Fechamento (Abertura)">
+            <Cabecalho pagina="Período de Fechamento (Abertura) (Micro frontend)">
               <BotaoVoltar onClick={() => void voltar(form)} />
               <Botao
                 id="SGP_BUTTON_CANCELAR"

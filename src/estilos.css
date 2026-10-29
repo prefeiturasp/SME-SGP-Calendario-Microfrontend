@@ -97,8 +97,8 @@
 .calendario-card {
   background: #fff;
   border-radius: 4px;
-  padding: 16px;
-  margin-top: 8px;
+  padding: 24px 8px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .caixa-bimestre {
