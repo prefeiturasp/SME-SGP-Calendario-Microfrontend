@@ -1,0 +1,175 @@
+.calendario-pagina {
+  font-family: Roboto, sans-serif;
+  color: #42474a;
+}
+
+.calendario-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap-reverse;
+  gap: 12px;
+  margin: 0 -32px 8px;
+  padding: 16px 32px 8px;
+  background: #f5f6f8;
+}
+
+.calendario-titulo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  color: #42474a;
+}
+
+.calendario-ajuda {
+  border: 0;
+  background: transparent;
+  color: #086397;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.calendario-acoes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn-acao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-acao:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-roxo {
+  border-color: #6933ff;
+  color: #6933ff;
+}
+
+.btn-azul {
+  border-color: #086397;
+  color: #086397;
+  width: 38px;
+  padding: 8px;
+}
+
+.btn-vermelho {
+  border-color: #b40c02;
+  color: #b40c02;
+  width: 38px;
+  padding: 8px;
+}
+
+.btn-roxo:hover:not(:disabled) {
+  background: #6933ff;
+  color: #fff;
+}
+
+.btn-azul:hover:not(:disabled) {
+  background: #086397;
+  color: #fff;
+}
+
+.btn-vermelho:hover:not(:disabled) {
+  background: #b40c02;
+  color: #fff;
+}
+
+.calendario-card {
+  background: #fff;
+  border-radius: 4px;
+  padding: 24px 8px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.caixa-bimestre {
+  width: 100%;
+  border-radius: 3px;
+  background-color: #dadada;
+  text-align: center;
+  padding: 10px;
+  color: #42474a;
+  margin-bottom: 8px;
+}
+
+.campo-label {
+  display: block;
+  margin-bottom: 4px;
+  color: #42474a;
+}
+
+.campo-obrigatorio {
+  color: #b40c02;
+  margin-left: 4px;
+}
+
+.campo-erro {
+  color: #b40c02;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.campo-invalido .ant-select-selector,
+.campo-invalido .ant-picker,
+.campo-invalido .ant-input {
+  border-color: #b40c02 !important;
+}
+
+.registro-migrado {
+  background-color: #6933ff;
+  border: solid 0.5px #6933ff;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+.auditoria {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #42474a;
+}
+
+.linha-filtros-reversa {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.aprovacao {
+  font-size: 9px;
+  font-weight: bold;
+  color: #42474a;
+  margin-top: 8px;
+}
+
+.bimestre-ok {
+  color: #297805;
+}
+
+@media (max-width: 768px) {
+  .linha-filtros-reversa {
+    flex-direction: column-reverse;
+  }
+}
