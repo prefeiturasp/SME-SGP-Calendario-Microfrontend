@@ -7,6 +7,8 @@ import Calendario from "./calendario";
 
 vi.mock("../../services/calendarioService", () => ({
   calendarioService: {
+    listarTiposCalendario: vi.fn().mockResolvedValue({ data: [] }),
+    excluirTiposCalendario: vi.fn().mockResolvedValue({}),
     obterTiposCalendarioAutoComplete: vi.fn().mockResolvedValue({ data: [] }),
     converterModalidade: vi.fn(),
   },
@@ -46,6 +48,10 @@ describe("Calendario", () => {
     [
       "/calendario-escolar/periodo-fechamento-reabertura/novo/15",
       "Período de Fechamento (Reabertura) (Micro frontend)",
+    ],
+    [
+      "/calendario-escolar/tipo-calendario-escolar",
+      "Tipo de calendário escolar",
     ],
   ])("exibe %s", async (rota, titulo) => {
     renderizar(rota);

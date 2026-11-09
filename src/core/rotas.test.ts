@@ -21,6 +21,9 @@ describe("resolverTela", () => {
     expect(resolverTela(`${ROTAS.PERIODO_FECHAMENTO_REABERTURA}/editar/4`)).toBe(
       "periodo-fechamento-reabertura-cadastro",
     );
+    expect(resolverTela(ROTAS.TIPO_CALENDARIO_ESCOLAR)).toBe(
+      "tipo-calendario-escolar",
+    );
   });
 
   it("ignora rotas de calendário fora desta etapa", () => {

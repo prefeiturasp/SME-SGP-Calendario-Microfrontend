@@ -11,6 +11,7 @@ import PeriodoFechamentoAbertura from "../periodo-fechamento-abertura/PeriodoFec
 import ReaberturaCadastro from "../periodo-fechamento-reabertura/ReaberturaCadastro";
 import ReaberturaLista from "../periodo-fechamento-reabertura/ReaberturaLista";
 import PeriodosEscolares from "../periodos-escolares/PeriodosEscolares";
+import TipoCalendarioListagem from "../tipo-calendario/TipoCalendarioListagem";
 import type { RootState } from "../../types/redux";
 import "../../estilos.css";
 
@@ -55,6 +56,9 @@ const Calendario = ({ apiUrl }: CalendarioProps) => {
         )}
         {tela === "periodo-fechamento-reabertura-cadastro" && (
           <ReaberturaCadastro key={`cadastro-${versaoEndereco}`} />
+        )}
+        {tela === "tipo-calendario-escolar" && (
+          <TipoCalendarioListagem key={`tipo-calendario-${versaoEndereco}`} />
         )}
         {!tela && <p>Tela de calendário não encontrada para esta rota.</p>}
       </div>

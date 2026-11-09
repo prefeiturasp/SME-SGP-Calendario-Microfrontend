@@ -26,6 +26,12 @@ const estadoInicial: RootState = {
         podeAlterar: true,
         podeExcluir: true,
       },
+      "/calendario-escolar/tipo-calendario-escolar": {
+        podeConsultar: true,
+        podeIncluir: true,
+        podeAlterar: true,
+        podeExcluir: true,
+      },
     },
   },
   navegacao: { rotaAtiva: "/calendario-escolar/periodos-escolares" },

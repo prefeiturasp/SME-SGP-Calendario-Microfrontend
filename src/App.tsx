@@ -30,6 +30,10 @@ const App = () => (
           path="/calendario-escolar/periodo-fechamento-reabertura/editar/:id"
           element={<Calendario />}
         />
+        <Route
+          path="/calendario-escolar/tipo-calendario-escolar"
+          element={<Calendario />}
+        />
         <Route path="*" element={<Calendario />} />
       </Routes>
     </BrowserRouter>

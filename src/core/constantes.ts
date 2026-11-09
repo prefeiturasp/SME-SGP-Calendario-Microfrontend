@@ -4,6 +4,7 @@ export const APLICACAO_SGP = 1;
 export const URL_HOME = "/";
 
 export const ROTAS = {
+  TIPO_CALENDARIO_ESCOLAR: "/calendario-escolar/tipo-calendario-escolar",
   PERIODOS_ESCOLARES: "/calendario-escolar/periodos-escolares",
   PERIODO_FECHAMENTO_ABERTURA: "/calendario-escolar/periodo-fechamento-abertura",
   PERIODO_FECHAMENTO_REABERTURA: "/calendario-escolar/periodo-fechamento-reabertura",
@@ -26,6 +27,8 @@ export const Modalidade = {
 export type TipoCalendario = {
   id: number;
   descricao: string;
+  nome?: string;
+  descricaoPeriodo?: string;
   periodo?: number;
   modalidade?: number;
   anoLetivo?: number;

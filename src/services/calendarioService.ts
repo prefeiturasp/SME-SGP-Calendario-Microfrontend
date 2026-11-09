@@ -3,7 +3,7 @@ import {
   ModalidadeTipoCalendario,
   type TipoCalendario,
 } from "../core/constantes";
-import { getSgp } from "../core/servico/apiSgp";
+import { deleteSgp, getSgp } from "../core/servico/apiSgp";
 
 const converterModalidade = (modalidadeCalendario?: number) => {
   switch (modalidadeCalendario) {
@@ -22,6 +22,9 @@ const converterModalidade = (modalidadeCalendario?: number) => {
 
 export const calendarioService = {
   converterModalidade,
+  listarTiposCalendario: () => getSgp<TipoCalendario[]>("v1/calendarios/tipos"),
+  excluirTiposCalendario: (ids: Array<string | number>) =>
+    deleteSgp("v1/calendarios/tipos", ids),
   obterTiposCalendarioAutoComplete: (descricao = "") =>
     getSgp<TipoCalendario[]>(
       `v1/calendarios/tipos/anos-letivos?descricao=${encodeURIComponent(descricao)}`,
