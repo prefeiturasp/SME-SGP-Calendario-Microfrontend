@@ -17,6 +17,23 @@ type TipoCalendarioLista = TipoCalendario & {
   descricaoPeriodo?: string;
 };
 
+const tiposCalendarioMockados: TipoCalendarioLista[] = [
+  {
+    id: 1,
+    descricao: "Calendário anual",
+    nome: "Calendário anual",
+    anoLetivo: 2026,
+    descricaoPeriodo: "Anual",
+  },
+  {
+    id: 2,
+    descricao: "Calendário semestral",
+    nome: "Calendário semestral",
+    anoLetivo: 2026,
+    descricaoPeriodo: "Semestral",
+  },
+];
+
 const colunas: ColumnsType<TipoCalendarioLista> = [
   {
     title: "Nome do tipo de calendário",
@@ -44,18 +61,14 @@ const TipoCalendarioListagem = () => {
     useState<TipoCalendarioLista[]>([]);
   const [carregando, setCarregando] = useState(false);
 
-  const onFiltrar = useCallback(async () => {
+  const onFiltrar = useCallback(() => {
     setIdTiposSelecionados([]);
     setCarregando(true);
-    try {
-      const resposta = await calendarioService.listarTiposCalendario();
-      setListaTiposCalendarioEscolar(resposta.data);
-    } catch (falha) {
-      exibirErrosApi(falha, usuario.logado);
-    } finally {
-      setCarregando(false);
-    }
-  }, [usuario.logado]);
+    // Reative a consulta à API quando a listagem deixar de usar dados mockados.
+    // const resposta = await calendarioService.listarTiposCalendario();
+    setListaTiposCalendarioEscolar(tiposCalendarioMockados);
+    setCarregando(false);
+  }, []);
 
   useEffect(() => {
     void onFiltrar();
@@ -91,7 +104,11 @@ const TipoCalendarioListagem = () => {
           idTiposSelecionados.length > 1 ? "Tipos" : "Tipo"
         } de calendário excluído com sucesso.`,
       );
-      await onFiltrar();
+      const idsExcluidos = new Set(idTiposSelecionados.map(Number));
+      setListaTiposCalendarioEscolar((lista) =>
+        lista.filter((tipo) => !idsExcluidos.has(Number(tipo.id))),
+      );
+      setIdTiposSelecionados([]);
     } catch (falha) {
       exibirErrosApi(falha, usuario.logado);
     }

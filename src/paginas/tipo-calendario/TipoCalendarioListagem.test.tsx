@@ -92,18 +92,7 @@ describe("TipoCalendarioListagem", () => {
 
     expect(await screen.findByText("Calendário anual")).toBeTruthy();
     expect(screen.getByText("Calendário semestral")).toBeTruthy();
-    expect(mocks.listarTiposCalendario).toHaveBeenCalledOnce();
-  });
-
-  it("exibe erros quando falha ao carregar os tipos", async () => {
-    const falha = new Error("Falha na API");
-    mocks.listarTiposCalendario.mockRejectedValueOnce(falha);
-
-    renderizar();
-
-    await waitFor(() => {
-      expect(mocks.exibirErrosApi).toHaveBeenCalledWith(falha, true);
-    });
+    expect(mocks.listarTiposCalendario).not.toHaveBeenCalled();
   });
 
   it("navega para edição ao clicar em uma linha", async () => {
@@ -183,8 +172,9 @@ describe("TipoCalendarioListagem", () => {
       expect(mocks.sucesso).toHaveBeenCalledWith(
         "Tipo de calendário excluído com sucesso.",
       );
-      expect(mocks.listarTiposCalendario).toHaveBeenCalledTimes(2);
+      expect(mocks.listarTiposCalendario).not.toHaveBeenCalled();
     });
+    expect(screen.queryByText("Calendário anual")).toBeNull();
   });
 
   it("usa as mensagens no plural ao excluir vários tipos", async () => {
@@ -226,7 +216,7 @@ describe("TipoCalendarioListagem", () => {
       expect(mocks.confirmar).toHaveBeenCalledOnce();
     });
     expect(mocks.excluirTiposCalendario).not.toHaveBeenCalled();
-    expect(mocks.listarTiposCalendario).toHaveBeenCalledOnce();
+    expect(mocks.listarTiposCalendario).not.toHaveBeenCalled();
   });
 
   it("exibe erros quando a exclusão falha", async () => {
