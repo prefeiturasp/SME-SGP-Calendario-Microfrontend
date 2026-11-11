@@ -5,7 +5,8 @@ import * as Yup from "yup";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Auditoria } from "../../componentes/ui/Auditoria";
-import { Botao, BotaoExcluir, BotaoVoltar } from "../../componentes/ui/Botao";
+import { Botao, BotaoVoltar } from "../../componentes/ui/Botao";
+import BotaoExcluirPadrao from "../../componentes/ui/BotaoExcluirPadrao";
 import { Cabecalho } from "../../componentes/ui/Cabecalho";
 import { Loader } from "../../componentes/ui/Loader";
 import { SelectCampo } from "../../componentes/ui/SelectCampo";
@@ -17,6 +18,7 @@ import {
 } from "../../core/constantes";
 import { definirBreadcrumbManual, verificaSomenteConsulta } from "../../core/sessao";
 import { useRotaCalendario } from "../../core/endereco";
+import { salvarTipoCalendarioMockado } from "../../mocks/tiposCalendarioMockados";
 import { abrangenciaService } from "../../services/abrangenciaService";
 import {
   calendarioService,
@@ -226,7 +228,9 @@ const TipoCalendarioCadastro = () => {
 
     setSalvando(true);
     try {
-      await calendarioService.salvarTipoCalendario(dados);
+      // Reative a chamada à API quando a tela deixar de usar dados mockados.
+      // await calendarioService.salvarTipoCalendario(dados);
+      salvarTipoCalendarioMockado(dados);
       sucesso("Suas informações foram salvas com sucesso.");
       navigate(ROTAS.TIPO_CALENDARIO_ESCOLAR);
     } catch (falha) {
@@ -328,7 +332,7 @@ const TipoCalendarioCadastro = () => {
                     />
                   </Col>
                   <Col>
-                    <BotaoExcluir
+                    <BotaoExcluirPadrao
                       disabled={excluirDesabilitado}
                       onClick={() => void excluir()}
                     />

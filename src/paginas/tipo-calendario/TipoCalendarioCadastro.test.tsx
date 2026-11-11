@@ -4,6 +4,7 @@ import { MemoryRouter, useLocation } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ROTAS } from "../../core/constantes";
 import { createMockStore } from "../../mocks/mockStore";
+import { obterTiposCalendarioMockados } from "../../mocks/tiposCalendarioMockados";
 import TipoCalendarioCadastro from "./TipoCalendarioCadastro";
 
 const mocks = vi.hoisted(() => ({
@@ -153,15 +154,14 @@ describe("TipoCalendarioCadastro", () => {
     fireEvent.click(screen.getByRole("button", { name: "Cadastrar" }));
 
     await waitFor(() => {
-      expect(mocks.salvarTipoCalendario).toHaveBeenCalledWith({
-        id: 0,
-        anoLetivo: 2026,
-        nome: "Novo calendário",
-        modalidade: "1",
-        periodo: 1,
-        situacao: true,
-        semestre: null,
-      });
+      expect(mocks.salvarTipoCalendario).not.toHaveBeenCalled();
+      expect(obterTiposCalendarioMockados()).toContainEqual(
+        expect.objectContaining({
+          nome: "Novo calendário",
+          anoLetivo: 2026,
+          descricaoPeriodo: "Anual",
+        }),
+      );
       expect(screen.getByTestId("localizacao").textContent).toBe(
         ROTAS.TIPO_CALENDARIO_ESCOLAR,
       );
@@ -180,15 +180,14 @@ describe("TipoCalendarioCadastro", () => {
     fireEvent.click(screen.getByRole("button", { name: "Alterar" }));
 
     await waitFor(() => {
-      expect(mocks.salvarTipoCalendario).toHaveBeenCalledWith({
-        id: "7",
-        anoLetivo: 2026,
-        nome: "Calendário atualizado",
-        modalidade: "1",
-        periodo: 1,
-        situacao: true,
-        semestre: null,
-      });
+      expect(mocks.salvarTipoCalendario).not.toHaveBeenCalled();
+      expect(obterTiposCalendarioMockados()).toContainEqual(
+        expect.objectContaining({
+          id: 7,
+          nome: "Calendário atualizado",
+          anoLetivo: 2026,
+        }),
+      );
       expect(screen.getByTestId("localizacao").textContent).toBe(
         ROTAS.TIPO_CALENDARIO_ESCOLAR,
       );
@@ -237,11 +236,13 @@ describe("TipoCalendarioCadastro", () => {
     });
 
     await waitFor(() => {
-      expect(mocks.salvarTipoCalendario).toHaveBeenCalledWith(
+      expect(mocks.salvarTipoCalendario).not.toHaveBeenCalled();
+      expect(obterTiposCalendarioMockados()).toContainEqual(
         expect.objectContaining({
-          modalidade: "2",
+          nome: "Calendário EJA",
+          modalidade: 2,
           periodo: 2,
-          semestre: "1",
+          descricaoPeriodo: "Semestral",
         }),
       );
     });

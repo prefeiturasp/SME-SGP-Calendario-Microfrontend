@@ -29,6 +29,7 @@ const BotaoExcluirPadrao = ({
         disabled={disabled}
         cor="vermelho"
         onClick={onClick}
+        ariaLabel="Excluir"
         icone={<FontAwesomeIcon icon={faTrashAlt} className="" />}
       />
     </span>

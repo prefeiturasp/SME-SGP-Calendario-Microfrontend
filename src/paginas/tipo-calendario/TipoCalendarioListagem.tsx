@@ -7,34 +7,16 @@ import BotaoExcluirPadrao from "../../componentes/ui/BotaoExcluirPadrao";
 import { Botao, BotaoVoltar } from "../../componentes/ui/Botao";
 import { Cabecalho } from "../../componentes/ui/Cabecalho";
 import { confirmar, exibirErrosApi, sucesso } from "../../core/config/alertas";
-import { ROTAS, URL_HOME, type TipoCalendario } from "../../core/constantes";
+import { ROTAS, URL_HOME } from "../../core/constantes";
+import {
+  obterTiposCalendarioMockados,
+  type TipoCalendarioMockado,
+} from "../../mocks/tiposCalendarioMockados";
 import { verificaSomenteConsulta } from "../../core/sessao";
 import { calendarioService } from "../../services/calendarioService";
 import type { RootState } from "../../types/redux";
 
-type TipoCalendarioLista = TipoCalendario & {
-  nome?: string;
-  descricaoPeriodo?: string;
-};
-
-const tiposCalendarioMockados: TipoCalendarioLista[] = [
-  {
-    id: 1,
-    descricao: "Calendário anual",
-    nome: "Calendário anual",
-    anoLetivo: 2026,
-    descricaoPeriodo: "Anual",
-  },
-  {
-    id: 2,
-    descricao: "Calendário semestral",
-    nome: "Calendário semestral",
-    anoLetivo: 2026,
-    descricaoPeriodo: "Semestral",
-  },
-];
-
-const colunas: ColumnsType<TipoCalendarioLista> = [
+const colunas: ColumnsType<TipoCalendarioMockado> = [
   {
     title: "Nome do tipo de calendário",
     dataIndex: "nome",
@@ -58,7 +40,7 @@ const TipoCalendarioListagem = () => {
     Array<string | number>
   >([]);
   const [listaTiposCalendarioEscolar, setListaTiposCalendarioEscolar] =
-    useState<TipoCalendarioLista[]>([]);
+    useState<TipoCalendarioMockado[]>([]);
   const [carregando, setCarregando] = useState(false);
 
   const onFiltrar = useCallback(() => {
@@ -66,7 +48,7 @@ const TipoCalendarioListagem = () => {
     setCarregando(true);
     // Reative a consulta à API quando a listagem deixar de usar dados mockados.
     // const resposta = await calendarioService.listarTiposCalendario();
-    setListaTiposCalendarioEscolar(tiposCalendarioMockados);
+    setListaTiposCalendarioEscolar(obterTiposCalendarioMockados());
     setCarregando(false);
   }, []);
 
@@ -141,7 +123,7 @@ const TipoCalendarioListagem = () => {
         </Row>
       </Cabecalho>
       <div className="calendario-card">
-        <Table<TipoCalendarioLista>
+        <Table<TipoCalendarioMockado>
           id="lista-tipo-calendario"
           rowKey="id"
           bordered
