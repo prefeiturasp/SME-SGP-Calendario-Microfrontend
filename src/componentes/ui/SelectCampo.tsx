@@ -17,6 +17,7 @@ export const SelectCampo = ({
   showSearch,
   erro,
   onChange,
+  allowClear,
 }: {
   id: string;
   label?: string;
@@ -32,6 +33,7 @@ export const SelectCampo = ({
   showSearch?: boolean;
   erro?: string;
   onChange: (valor: string | string[]) => void;
+  allowClear?: boolean;
 }) => (
   <div className={erro ? "campo-invalido" : undefined}>
     {label && (
@@ -55,6 +57,7 @@ export const SelectCampo = ({
           label: String(item[valueText] ?? ""),
         }))}
         onChange={(selecionado) => onChange(selecionado as string | string[])}
+        allowClear={allowClear}
       />
     </Spin>
     {erro && <div className="campo-erro">{erro}</div>}
