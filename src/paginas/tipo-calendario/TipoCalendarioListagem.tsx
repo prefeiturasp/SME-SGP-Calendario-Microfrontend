@@ -6,14 +6,16 @@ import { useNavigate } from "react-router-dom";
 import BotaoExcluirPadrao from "../../componentes/ui/BotaoExcluirPadrao";
 import { Botao, BotaoVoltar } from "../../componentes/ui/Botao";
 import { Cabecalho } from "../../componentes/ui/Cabecalho";
-import { confirmar, exibirErrosApi, sucesso } from "../../core/config/alertas";
+import { confirmar, sucesso } from "../../core/config/alertas";
+// import { exibirErrosApi } from "../../core/config/alertas";
 import { ROTAS, URL_HOME } from "../../core/constantes";
 import {
   obterTiposCalendarioMockados,
+  removerTiposCalendarioMockados,
   type TipoCalendarioMockado,
 } from "../../mocks/tiposCalendarioMockados";
 import { verificaSomenteConsulta } from "../../core/sessao";
-import { calendarioService } from "../../services/calendarioService";
+// import { calendarioService } from "../../services/calendarioService";
 import type { RootState } from "../../types/redux";
 
 const colunas: ColumnsType<TipoCalendarioMockado> = [
@@ -79,6 +81,7 @@ const TipoCalendarioListagem = () => {
     );
     if (!confirmado) return;
 
+    /*
     try {
       await calendarioService.excluirTiposCalendario(idTiposSelecionados);
       sucesso(
@@ -94,6 +97,18 @@ const TipoCalendarioListagem = () => {
     } catch (falha) {
       exibirErrosApi(falha, usuario.logado);
     }
+    */
+    removerTiposCalendarioMockados(idTiposSelecionados);
+    sucesso(
+      `${
+        idTiposSelecionados.length > 1 ? "Tipos" : "Tipo"
+      } de calendário excluído com sucesso.`,
+    );
+    const idsExcluidos = new Set(idTiposSelecionados.map(Number));
+    setListaTiposCalendarioEscolar((lista) =>
+      lista.filter((tipo) => !idsExcluidos.has(Number(tipo.id))),
+    );
+    setIdTiposSelecionados([]);
   };
 
   return (

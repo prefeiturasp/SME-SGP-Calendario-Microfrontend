@@ -6,7 +6,7 @@ export type TipoCalendarioMockado = TipoCalendario & {
   descricaoPeriodo?: string;
 };
 
-const tiposCalendarioMockados: TipoCalendarioMockado[] = [
+const tiposCalendarioIniciais: TipoCalendarioMockado[] = [
   {
     id: 1,
     descricao: "Calendário anual",
@@ -23,7 +23,25 @@ const tiposCalendarioMockados: TipoCalendarioMockado[] = [
   },
 ];
 
+const tiposCalendarioMockados = [...tiposCalendarioIniciais];
+
 export const obterTiposCalendarioMockados = () => [...tiposCalendarioMockados];
+
+export const removerTiposCalendarioMockados = (ids: Array<string | number>) => {
+  const idsRemovidos = new Set(ids.map(Number));
+  const restantes = tiposCalendarioMockados.filter(
+    (tipo) => !idsRemovidos.has(tipo.id),
+  );
+  tiposCalendarioMockados.splice(0, tiposCalendarioMockados.length, ...restantes);
+};
+
+export const reinicializarTiposCalendarioMockados = () => {
+  tiposCalendarioMockados.splice(
+    0,
+    tiposCalendarioMockados.length,
+    ...tiposCalendarioIniciais,
+  );
+};
 
 export const salvarTipoCalendarioMockado = (dados: CadastroTipoCalendario) => {
   const maiorId = Math.max(
