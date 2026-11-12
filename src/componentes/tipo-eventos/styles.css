@@ -1,0 +1,103 @@
+.lista-paginada {
+    --roxo: #6933ff;
+    --branco: #fff;
+    --cinza-fundo: #f5f6f8;
+    --cinza-desabilitado: #dadada;
+    --vermelho: #b40c02;
+}
+
+.lista-paginada .ocultar-coluna-multi-selecao .ant-table-selection-column,
+.lista-paginada .ocultar-coluna-multi-selecao .ant-table-selection-col {
+    display: none !important;
+}
+
+.lista-paginada .ant-table table {
+    border-collapse: collapse;
+}
+
+.lista-paginada .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+    background-color: var(--roxo) !important;
+}
+
+.lista-paginada .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: var(--roxo);
+    border-color: var(--branco) !important;
+}
+
+.lista-paginada .ant-table-thead tr th {
+    background: var(--cinza-fundo) !important;
+    border-right: solid 1px var(--cinza-desabilitado);
+    text-align: left;
+}
+
+.lista-paginada .ant-table-selection-column {
+    text-align: center !important;
+    cursor: pointer;
+}
+
+.lista-paginada .ant-table-tbody tr td {
+    border-right: solid 1px var(--cinza-desabilitado);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.lista-paginada .ant-table-column-title {
+    color: #323c47;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.12px;
+}
+
+.lista-paginada .ant-table-tbody tr td span.cor-vermelho {
+    color: var(--vermelho);
+}
+
+/* hover */
+.lista-paginada .ant-table-tbody tr:not(.ant-table-expanded-row):hover td {
+    background: var(--roxo) !important;
+    color: var(--branco) !important;
+}
+
+.lista-paginada .ant-table-tbody tr:not(.ant-table-expanded-row):hover td span.cor-vermelho,
+.lista-paginada .ant-table-tbody tr:not(.ant-table-expanded-row):hover td span.cor-novo-registro-lista,
+.lista-paginada .ant-table-tbody tr:not(.ant-table-expanded-row):hover td a.texto-vermelho-negrito,
+.lista-paginada .ant-table-tbody tr:not(.ant-table-expanded-row):hover td a.cor-novo-registro-lista,
+.lista-paginada .ant-table-tbody tr:not(.ant-table-expanded-row):hover td .cor-branco-hover {
+    color: var(--branco) !important;
+}
+
+.lista-paginada .ant-table-tbody tr:not(.ant-table-expanded-row):hover {
+    background: var(--roxo) !important;
+    color: var(--branco) !important;
+}
+
+.lista-paginada .ant-table-tbody tr.ant-table-expanded-row {
+    background: none !important;
+}
+
+.lista-paginada .ant-table-tbody tr.ant-table-expanded-row td {
+    cursor: default !important;
+}
+
+.lista-paginada .ant-table-tbody tr.ant-table-expanded-row td .ant-table:first-child {
+    margin: 15px !important;
+}
+
+/* linha selecionada */
+.lista-paginada .ant-table-tbody tr.ant-table-row-selected>td {
+    background: var(--roxo);
+    color: var(--branco) !important;
+}
+
+.lista-paginada .ant-table-tbody tr.ant-table-row-selected>td span.cor-vermelho,
+.lista-paginada .ant-table-tbody tr.ant-table-row-selected>td span.cor-novo-registro-lista,
+.lista-paginada .ant-table-tbody tr.ant-table-row-selected>td a.texto-vermelho-negrito,
+.lista-paginada .ant-table-tbody tr.ant-table-row-selected>td a.cor-novo-registro-lista {
+    color: var(--branco) !important;
+}
+
+.lista-paginada .ant-table-tbody>tr,
+.lista-paginada .ant-table-tbody>tr td,
+.lista-paginada .ant-table-tbody>tr td a {
+    transition: none;
+}

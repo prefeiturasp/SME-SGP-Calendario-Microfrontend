@@ -31,6 +31,10 @@ const App = () => (
           element={<Calendario />}
         />
         <Route
+          path="/calendario-escolar/tipo-eventos"
+          element={<Calendario />}
+        />
+        <Route
           path="/calendario-escolar/tipo-calendario-escolar"
           element={<Calendario />}
         />

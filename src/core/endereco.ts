@@ -21,7 +21,8 @@ const resolverPeloEndereco = (pathname: string) => {
     pathname.includes("/calendario-escolar/periodos-escolares") ||
     pathname.includes("/calendario-escolar/periodo-fechamento-abertura") ||
     pathname.includes("/calendario-escolar/periodo-fechamento-reabertura") ||
-    pathname.includes("/calendario-escolar/tipo-calendario-escolar")
+    pathname.includes("/calendario-escolar/tipo-calendario-escolar") ||
+    pathname.includes("/calendario-escolar/tipo-eventos")
   );
 };
 

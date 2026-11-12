@@ -14,6 +14,7 @@ import PeriodosEscolares from "../periodos-escolares/PeriodosEscolares";
 import TipoCalendarioListagem from "../tipo-calendario/TipoCalendarioListagem";
 import type { RootState } from "../../types/redux";
 import "../../estilos.css";
+import { TipoEventosListagem } from "../tipo-evento/TipoEventosListagem";
 
 export type CalendarioProps = {
   apiUrl?: string;
@@ -59,6 +60,9 @@ const Calendario = ({ apiUrl }: CalendarioProps) => {
         )}
         {tela === "tipo-calendario-escolar" && (
           <TipoCalendarioListagem key={`tipo-calendario-${versaoEndereco}`} />
+        )}
+        {tela === "tipo-eventos" && (
+          <TipoEventosListagem key={`tipo-calendario-${versaoEndereco}`} />
         )}
         {!tela && <p>Tela de calendário não encontrada para esta rota.</p>}
       </div>

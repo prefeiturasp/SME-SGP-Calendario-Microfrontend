@@ -8,6 +8,7 @@ export const ROTAS = {
   PERIODOS_ESCOLARES: "/calendario-escolar/periodos-escolares",
   PERIODO_FECHAMENTO_ABERTURA: "/calendario-escolar/periodo-fechamento-abertura",
   PERIODO_FECHAMENTO_REABERTURA: "/calendario-escolar/periodo-fechamento-reabertura",
+  TIPO_EVENTOS: '/calendario-escolar/tipo-eventos',
 } as const;
 
 export const ModalidadeTipoCalendario = {
