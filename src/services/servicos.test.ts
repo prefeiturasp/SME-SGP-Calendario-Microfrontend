@@ -26,10 +26,44 @@ describe("serviços HTTP do calendário", () => {
   });
 
   it("consulta tipos de calendário e converte a modalidade", () => {
+    calendarioService.listarTiposCalendario();
     calendarioService.obterTiposCalendarioAutoComplete("fund");
+    calendarioService.obterTipoCalendario(4);
+    calendarioService.salvarTipoCalendario({
+      id: 4,
+      anoLetivo: 2026,
+      nome: "Calendário",
+      modalidade: "1",
+      periodo: 1,
+      situacao: true,
+      semestre: null,
+    });
+    calendarioService.salvarTipoCalendario({
+      id: 0,
+      anoLetivo: 2026,
+      nome: "Calendário",
+      modalidade: "1",
+      periodo: 1,
+      situacao: true,
+      semestre: null,
+    });
+    calendarioService.excluirTiposCalendario([4]);
+    abrangenciaService.buscarTodosAnosLetivos();
+    expect(get).toHaveBeenCalledWith("v1/calendarios/tipos");
     expect(get).toHaveBeenCalledWith(
       "v1/calendarios/tipos/anos-letivos?descricao=fund",
     );
+    expect(get).toHaveBeenCalledWith("v1/calendarios/tipos/4");
+    expect(get).toHaveBeenCalledWith("/v1/abrangencias/false/anos-letivos-todos");
+    expect(put).toHaveBeenCalledWith(
+      "v1/calendarios/tipos/4",
+      expect.objectContaining({ id: 4 }),
+    );
+    expect(post).toHaveBeenCalledWith(
+      "v1/calendarios/tipos",
+      expect.objectContaining({ id: 0 }),
+    );
+    expect(remover).toHaveBeenCalledWith("v1/calendarios/tipos", [4]);
     expect(calendarioService.converterModalidade(ModalidadeTipoCalendario.EJA)).toBe(
       Modalidade.EJA,
     );
