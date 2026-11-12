@@ -14,7 +14,7 @@ type NotificacaoApi = {
 type ModalApi = {
   confirm: (config: {
     title: string;
-    content: string;
+    content: React.ReactNode | string;
     okText: string;
     cancelText: string;
     onOk: () => void;

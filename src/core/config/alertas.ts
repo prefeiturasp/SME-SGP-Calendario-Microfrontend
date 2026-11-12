@@ -54,8 +54,9 @@ export const confirmar = (
   textoNegrito = "",
   textoOk?: string,
   textoCancelar?: string,
+  conteudoReactElement?: React.ReactNode
 ) => {
-  const conteudo = [texto, textoNegrito].filter(Boolean).join(" ");
+  const conteudo = conteudoReactElement ?? [texto, textoNegrito].filter(Boolean).join(" ");
   return new Promise<boolean>((resolve) => {
     const config = {
       title: titulo,
