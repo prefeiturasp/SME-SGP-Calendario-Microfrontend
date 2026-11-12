@@ -4,6 +4,10 @@ import { MemoryRouter, useLocation } from "react-router-dom";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ROTAS, type PermissoesTela } from "../../core/constantes";
 import { createMockStore } from "../../mocks/mockStore";
+import {
+  obterTiposCalendarioMockados,
+  reinicializarTiposCalendarioMockados,
+} from "../../mocks/tiposCalendarioMockados";
 import TipoCalendarioListagem from "./TipoCalendarioListagem";
 
 const mocks = vi.hoisted(() => ({
@@ -82,6 +86,7 @@ const renderizar = (permissoes = permissoesCompletas) => {
 describe("TipoCalendarioListagem", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    reinicializarTiposCalendarioMockados();
     mocks.listarTiposCalendario.mockResolvedValue({ data: tipos });
     mocks.excluirTiposCalendario.mockResolvedValue({});
     mocks.confirmar.mockResolvedValue(true);
@@ -168,13 +173,16 @@ describe("TipoCalendarioListagem", () => {
         "Excluir",
         "Cancelar",
       );
-      expect(mocks.excluirTiposCalendario).toHaveBeenCalledWith([1]);
+      expect(mocks.excluirTiposCalendario).not.toHaveBeenCalled();
       expect(mocks.sucesso).toHaveBeenCalledWith(
         "Tipo de calendário excluído com sucesso.",
       );
       expect(mocks.listarTiposCalendario).not.toHaveBeenCalled();
     });
     expect(screen.queryByText("Calendário anual")).toBeNull();
+    expect(obterTiposCalendarioMockados()).not.toContainEqual(
+      expect.objectContaining({ id: 1 }),
+    );
   });
 
   it("usa as mensagens no plural ao excluir vários tipos", async () => {
@@ -197,7 +205,7 @@ describe("TipoCalendarioListagem", () => {
         "Excluir",
         "Cancelar",
       );
-      expect(mocks.excluirTiposCalendario).toHaveBeenCalledWith([1, 2]);
+      expect(mocks.excluirTiposCalendario).not.toHaveBeenCalled();
       expect(mocks.sucesso).toHaveBeenCalledWith(
         "Tipos de calendário excluído com sucesso.",
       );
@@ -219,9 +227,7 @@ describe("TipoCalendarioListagem", () => {
     expect(mocks.listarTiposCalendario).not.toHaveBeenCalled();
   });
 
-  it("exibe erros quando a exclusão falha", async () => {
-    const falha = new Error("Falha ao excluir");
-    mocks.excluirTiposCalendario.mockRejectedValueOnce(falha);
+  it("remove da lista mockada sem chamar a API", async () => {
     renderizar();
     const linha = (await screen.findByText("Calendário anual")).closest("tr");
     expect(linha).toBeTruthy();
@@ -229,7 +235,10 @@ describe("TipoCalendarioListagem", () => {
     fireEvent.click(document.getElementById("SGP_BUTTON_EXCLUIR") as HTMLElement);
 
     await waitFor(() => {
-      expect(mocks.exibirErrosApi).toHaveBeenCalledWith(falha, true);
+      expect(mocks.excluirTiposCalendario).not.toHaveBeenCalled();
+      expect(obterTiposCalendarioMockados()).not.toContainEqual(
+        expect.objectContaining({ id: 1 }),
+      );
     });
   });
 });
