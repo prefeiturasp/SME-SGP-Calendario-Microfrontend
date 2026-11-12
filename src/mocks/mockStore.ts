@@ -8,6 +8,12 @@ const estadoInicial: RootState = {
     possuiPerfilSme: true,
     possuiPerfilSmeOuDre: true,
     permissoes: {
+      "/calendario-escolar/tipo-feriado": {
+        podeConsultar: true,
+        podeIncluir: true,
+        podeAlterar: true,
+        podeExcluir: true,
+      },
       "/calendario-escolar/periodos-escolares": {
         podeConsultar: true,
         podeIncluir: true,

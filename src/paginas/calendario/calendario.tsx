@@ -11,6 +11,7 @@ import PeriodoFechamentoAbertura from "../periodo-fechamento-abertura/PeriodoFec
 import ReaberturaCadastro from "../periodo-fechamento-reabertura/ReaberturaCadastro";
 import ReaberturaLista from "../periodo-fechamento-reabertura/ReaberturaLista";
 import PeriodosEscolares from "../periodos-escolares/PeriodosEscolares";
+import TipoFeriadoLista from "../tipo-feriado/TipoFeriadoLista";
 import type { RootState } from "../../types/redux";
 import "../../estilos.css";
 
@@ -44,6 +45,7 @@ const Calendario = ({ apiUrl }: CalendarioProps) => {
   return (
     <AntdAppProvider>
       <div className="calendario-pagina">
+        {tela === "tipo-feriado" && <TipoFeriadoLista key={`feriados-${versaoEndereco}`} />}
         {tela === "periodos-escolares" && (
           <PeriodosEscolares key={`periodos-${versaoEndereco}`} />
         )}

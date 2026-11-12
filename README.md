@@ -20,7 +20,21 @@ A listagem de reabertura também abre o cadastro nestas rotas, porque Novo, Edit
 - `/calendario-escolar/periodo-fechamento-reabertura/novo/:tipoCalendarioId`
 - `/calendario-escolar/periodo-fechamento-reabertura/editar/:id`
 
-As demais telas de Calendário Escolar continuam no WebClient.
+### Lista de tipo de feriado — história 160039
+
+A rota `/calendario-escolar/tipo-feriado` também é atendida pelo remote,
+preservando a entrada **Início > Gestão > Lista de Tipo de Feriado** no host.
+Nesta história, os dados são exclusivamente de demonstração. Listagem,
+filtros combinados, seleção e paginação funcionam; Novo, Excluir e edição
+exibem um aviso demonstrativo, sem gravação ou navegação para os formulários antigos.
+
+`tipoFeriadoService.listar` é a fachada da página. O adaptador em
+`src/mocks/tipoFeriadoMock.ts` retorna `itens/total` e mantém as fixtures fora
+dos componentes. API/BFF futuros devem adaptar seus resultados a esse contrato.
+Os nomes/classificações das referências visuais não são um catálogo legal vigente.
+
+As demais telas de Calendário Escolar continuam no WebClient, inclusive os
+formulários reais de tipos de feriado, que não recebem os IDs mockados desta lista.
 
 ### Arquitetura
 

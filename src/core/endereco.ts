@@ -1,4 +1,5 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { ROTAS } from "./constantes";
 
 export const lerParametros = (pathname: string) => {
   const editar = pathname.match(/\/editar\/([^/]+)/);
@@ -18,6 +19,7 @@ export const caminhoEfetivo = (pathnameDoRouter: string) => {
 
 const resolverPeloEndereco = (pathname: string) => {
   return (
+    pathname.replace(/\/+$/, "") === ROTAS.TIPO_FERIADO ||
     pathname.includes("/calendario-escolar/periodos-escolares") ||
     pathname.includes("/calendario-escolar/periodo-fechamento-abertura") ||
     pathname.includes("/calendario-escolar/periodo-fechamento-reabertura")

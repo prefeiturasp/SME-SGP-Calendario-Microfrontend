@@ -3,6 +3,12 @@ import { ROTAS } from "./constantes";
 import { resolverTela } from "./rotas";
 
 describe("resolverTela", () => {
+  it("encaminha somente a listagem de feriados, incluindo a barra final", () => {
+    expect(resolverTela("/calendario-escolar/tipo-feriado")).toBe("tipo-feriado");
+    expect(resolverTela("/calendario-escolar/tipo-feriado/")).toBe("tipo-feriado");
+    expect(resolverTela("/calendario-escolar/tipo-feriado/novo")).toBeNull();
+    expect(resolverTela("/calendario-escolar/tipo-feriado/editar/1")).toBeNull();
+  });
   it("encaminha as três rotas do calendário e o cadastro da reabertura", () => {
     expect(resolverTela(ROTAS.PERIODOS_ESCOLARES)).toBe("periodos-escolares");
     expect(resolverTela(`${ROTAS.PERIODOS_ESCOLARES}/`)).toBe("periodos-escolares");
