@@ -21,8 +21,10 @@ export default defineConfig({
         "src/core/**/*.ts",
         "src/services/**/*.ts",
         "src/config.ts",
+        "src/mocks/tipoFeriadoMock.ts",
+        "src/paginas/tipo-feriado/**/*.tsx",
       ],
-      exclude: ["src/**/*.test.ts"],
+      exclude: ["src/**/*.test.{ts,tsx}"],
     },
   },
 });

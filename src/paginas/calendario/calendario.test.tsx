@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockStore } from "../../mocks/mockStore";
 import Calendario from "./calendario";
 
@@ -46,8 +46,12 @@ describe("Calendario", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
+  afterEach(() => {
+    window.history.replaceState(null, "", "/");
+  });
 
   it.each([
+    ["/calendario-escolar/tipo-feriado", "Lista de tipo de feriado"],
     ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar (Micro frontend)"],
     [
       "/calendario-escolar/periodo-fechamento-abertura",
@@ -76,5 +80,11 @@ describe("Calendario", () => {
   ])("exibe %s", async (rota, titulo) => {
     renderizar(rota);
     expect(await screen.findByRole("heading", { name: titulo })).toBeTruthy();
+  });
+
+  it("acompanha a URL do host ao entrar na listagem a partir de outra tela", async () => {
+    window.history.replaceState(null, "", "/calendario-escolar/tipo-feriado");
+    renderizar("/calendario-escolar/periodos-escolares");
+    expect(await screen.findByRole("heading", { name: "Lista de tipo de feriado" })).toBeTruthy();
   });
 });

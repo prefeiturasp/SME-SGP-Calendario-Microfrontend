@@ -9,6 +9,7 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
+        <Route path="/calendario-escolar/tipo-feriado" element={<Calendario />} />
         <Route path="/calendario-escolar/periodos-escolares" element={<Calendario />} />
         <Route
           path="/calendario-escolar/periodo-fechamento-abertura"

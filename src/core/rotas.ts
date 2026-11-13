@@ -1,6 +1,7 @@
 import { ROTAS } from "./constantes";
 
 export type TelaCalendario =
+  | "tipo-feriado"
   | "periodos-escolares"
   | "periodo-fechamento-abertura"
   | "periodo-fechamento-reabertura"
@@ -11,6 +12,8 @@ export type TelaCalendario =
 
 export const resolverTela = (pathname: string): TelaCalendario | null => {
   const caminho = pathname.replace(/\/+$/, "") || "/";
+
+  if (caminho === ROTAS.TIPO_FERIADO) return "tipo-feriado";
 
   if (
     caminho === ROTAS.PERIODOS_ESCOLARES ||
