@@ -13,6 +13,7 @@ A primeira etapa migrou três telas do WebClient para este repositório, preserv
 | Períodos Escolares                 | `/calendario-escolar/periodos-escolares`            |
 | Período de Fechamento e Abertura   | `/calendario-escolar/periodo-fechamento-abertura`   |
 | Período de Fechamento e Reabertura | `/calendario-escolar/periodo-fechamento-reabertura` |
+| Eventos (listagem, **somente mock nesta etapa**) | `/calendario-escolar/eventos` e `/calendario-escolar/eventos/:tipoCalendarioId` |
 
 A listagem de reabertura também abre o cadastro nestas rotas, porque Novo, Editar e Excluir dependem delas:
 
@@ -62,6 +63,7 @@ As URLs ficam nos serviços em `src/services`. Os componentes não montam a base
 | `periodoEscolarService`       | `GET` e `POST v1/periodo-escolar`                                                                               |
 | `periodoFechamentoService`    | `GET` e `POST /v1/periodos/fechamentos/aberturas` (`aplicacao=1`)                                               |
 | `fechamentoReaberturaService` | `GET`, `POST`, `PUT` e `DELETE v1/fechamentos/reaberturas`                                                      |
+| `eventoService`               | **mock local** |
 | `abrangenciaService`          | `GET /v1/abrangencias/{consideraHistorico}/dres` e `GET /v1/abrangencias/{consideraHistorico}/dres/{dreId}/ues` |
 
 A ordem da URL é: prop `apiUrl` do host, depois `window.__ENV__.VITE_SGP_API` (gerado no container), depois `VITE_SGP_API` do `.env`.

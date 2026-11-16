@@ -7,6 +7,8 @@ import { caminhoEfetivo } from "../../core/endereco";
 import { resolverTela } from "../../core/rotas";
 import { registrarDispatch } from "../../core/sessao";
 import { definirSessaoApi } from "../../core/servico/apiSgp";
+import EventosCadastro from "../eventos/cadastro/EventosCadastro";
+import EventosLista from "../eventos/lista/EventosLista";
 import PeriodoFechamentoAbertura from "../periodo-fechamento-abertura/PeriodoFechamentoAbertura";
 import ReaberturaCadastro from "../periodo-fechamento-reabertura/ReaberturaCadastro";
 import ReaberturaLista from "../periodo-fechamento-reabertura/ReaberturaLista";
@@ -44,6 +46,10 @@ const Calendario = ({ apiUrl }: CalendarioProps) => {
   return (
     <AntdAppProvider>
       <div className="calendario-pagina">
+        {tela === "eventos" && <EventosLista key={`eventos-${versaoEndereco}`} />}
+        {tela === "evento-cadastro" && (
+          <EventosCadastro key={`evento-cadastro-${versaoEndereco}`} />
+        )}
         {tela === "periodos-escolares" && (
           <PeriodosEscolares key={`periodos-${versaoEndereco}`} />
         )}

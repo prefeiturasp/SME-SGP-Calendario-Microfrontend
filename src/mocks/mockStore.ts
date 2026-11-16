@@ -7,6 +7,8 @@ const estadoInicial: RootState = {
     token: "token-teste",
     possuiPerfilSme: true,
     possuiPerfilSmeOuDre: true,
+    possuiPerfilDre: false,
+    rf: "0000001",
     permissoes: {
       "/calendario-escolar/periodos-escolares": {
         podeConsultar: true,
@@ -21,6 +23,12 @@ const estadoInicial: RootState = {
         podeExcluir: true,
       },
       "/calendario-escolar/periodo-fechamento-reabertura": {
+        podeConsultar: true,
+        podeIncluir: true,
+        podeAlterar: true,
+        podeExcluir: true,
+      },
+      "/calendario-escolar/eventos": {
         podeConsultar: true,
         podeIncluir: true,
         podeAlterar: true,

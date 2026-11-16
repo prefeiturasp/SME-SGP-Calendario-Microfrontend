@@ -26,7 +26,7 @@ export const Botao = ({
     <button
       type="button"
       id={id}
-      className={`btn-acao btn-${cor}`}
+      className={`btn-acao btn-${cor}${label ? " btn-com-texto" : ""}`}
       disabled={disabled}
       title={titulo}
       onClick={onClick}

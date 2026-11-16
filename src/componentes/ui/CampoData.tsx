@@ -1,5 +1,6 @@
 import { DatePicker } from "antd";
 import type { FormikProps } from "formik";
+import type { Dayjs } from "dayjs";
 import { paraDia, type ValorData } from "../../core/datas";
 
 type Formulario = FormikProps<Record<string, unknown>>;
@@ -13,6 +14,7 @@ export const CampoData = ({
   labelRequired,
   onChange,
   diasParaHabilitar,
+  dataDesabilitada,
 }: {
   form: Formulario;
   name: string;
@@ -22,6 +24,7 @@ export const CampoData = ({
   labelRequired?: boolean;
   onChange?: () => void;
   diasParaHabilitar?: string[] | null;
+  dataDesabilitada?: (data: Dayjs) => boolean;
 }) => {
   const valor = paraDia(form.values[name] as ValorData);
   const mensagem = form.touched[name] ? (form.errors[name] as string | undefined) : undefined;
@@ -44,6 +47,7 @@ export const CampoData = ({
         style={{ width: "100%" }}
         showToday={false}
         disabledDate={(dataAtual) => {
+          if (dataDesabilitada?.(dataAtual)) return true;
           if (!diasParaHabilitar?.length) return false;
           return !diasParaHabilitar.includes(dataAtual.format("YYYY-MM-DD"));
         }}

@@ -15,6 +15,7 @@ export const SelectCampo = ({
   labelRequired,
   multiple,
   showSearch,
+  permiteLimpar,
   erro,
   onChange,
 }: {
@@ -30,6 +31,7 @@ export const SelectCampo = ({
   labelRequired?: boolean;
   multiple?: boolean;
   showSearch?: boolean;
+  permiteLimpar?: boolean;
   erro?: string;
   onChange: (valor: string | string[]) => void;
 }) => (
@@ -48,13 +50,14 @@ export const SelectCampo = ({
         disabled={disabled}
         mode={multiple ? "multiple" : undefined}
         showSearch={showSearch}
+        allowClear={permiteLimpar}
         optionFilterProp="label"
         value={value || undefined}
         options={lista.map((item) => ({
           value: String(item[valueOption] ?? ""),
           label: String(item[valueText] ?? ""),
         }))}
-        onChange={(selecionado) => onChange(selecionado as string | string[])}
+        onChange={(selecionado) => onChange((selecionado ?? "") as string | string[])}
       />
     </Spin>
     {erro && <div className="campo-erro">{erro}</div>}
