@@ -3,13 +3,20 @@ import { ROTAS } from "./constantes";
 export type TelaCalendario =
   | "eventos"
   | "evento-cadastro"
+  | "tipo-feriado"
   | "periodos-escolares"
   | "periodo-fechamento-abertura"
   | "periodo-fechamento-reabertura"
-  | "periodo-fechamento-reabertura-cadastro";
+  | "periodo-fechamento-reabertura-cadastro"
+  | "tipo-calendario-escolar"
+  | "tipo-calendario-escolar-cadastro"
+  | "tipo-eventos"
+  | "tipo-eventos-formulario";
 
 export const resolverTela = (pathname: string): TelaCalendario | null => {
   const caminho = pathname.replace(/\/+$/, "") || "/";
+
+  if (caminho === ROTAS.TIPO_FERIADO) return "tipo-feriado";
 
   if (
     caminho === ROTAS.PERIODOS_ESCOLARES ||
@@ -46,6 +53,31 @@ export const resolverTela = (pathname: string): TelaCalendario | null => {
     const [segmento] = caminho.slice(ROTAS.EVENTOS.length + 1).split("/");
     if (segmento === "novo" || segmento === "editar") return "evento-cadastro";
     return "eventos";
+  }
+  
+  if (
+    caminho === `${ROTAS.TIPO_EVENTOS}/novo` ||
+    caminho.startsWith(`${ROTAS.TIPO_EVENTOS}/editar/`)
+  ) {
+    return "tipo-eventos-formulario";
+  }
+
+  if (
+    caminho === ROTAS.TIPO_EVENTOS ||
+    caminho.startsWith(`${ROTAS.TIPO_EVENTOS}/`)
+  ) {
+    return "tipo-eventos";
+  }
+
+  if (
+    caminho === `${ROTAS.TIPO_CALENDARIO_ESCOLAR}/novo` ||
+    caminho.startsWith(`${ROTAS.TIPO_CALENDARIO_ESCOLAR}/editar/`)
+  ) {
+    return "tipo-calendario-escolar-cadastro";
+  }
+
+  if (caminho === ROTAS.TIPO_CALENDARIO_ESCOLAR) {
+    return "tipo-calendario-escolar";
   }
 
   return null;

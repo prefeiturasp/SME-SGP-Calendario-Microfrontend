@@ -11,6 +11,7 @@ type BotaoProps = {
   cor?: "roxo" | "azul" | "vermelho";
   icone?: ReactNode;
   titulo?: string;
+  ariaLabel?: string;
 };
 
 export const Botao = ({
@@ -21,14 +22,24 @@ export const Botao = ({
   cor = "roxo",
   icone,
   titulo,
+  ariaLabel,
 }: BotaoProps) => {
+  const className = [
+    "btn-acao",
+    !disabled && `btn-${cor}`,
+    label && "btn-com-texto",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   const botao = (
     <button
       type="button"
       id={id}
-      className={`btn-acao btn-${cor}${label ? " btn-com-texto" : ""}`}
+      className={className}
       disabled={disabled}
       title={titulo}
+      aria-label={ariaLabel ?? titulo}
       onClick={onClick}
     >
       {icone}

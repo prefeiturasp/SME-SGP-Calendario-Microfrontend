@@ -9,6 +9,7 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
+        <Route path="/calendario-escolar/tipo-feriado" element={<Calendario />} />
         <Route path="/calendario-escolar/periodos-escolares" element={<Calendario />} />
         <Route
           path="/calendario-escolar/periodo-fechamento-abertura"
@@ -36,6 +37,30 @@ const App = () => (
         <Route path="/calendario-escolar/eventos/editar/:id" element={<Calendario />} />
         <Route
           path="/calendario-escolar/eventos/editar/:id/:tipoCalendarioId"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-eventos"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-eventos/novo"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-eventos/editar/:id"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-calendario-escolar"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-calendario-escolar/novo"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-calendario-escolar/editar/:id"
           element={<Calendario />}
         />
         <Route path="*" element={<Calendario />} />

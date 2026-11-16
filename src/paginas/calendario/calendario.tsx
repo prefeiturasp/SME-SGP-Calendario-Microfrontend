@@ -13,6 +13,11 @@ import PeriodoFechamentoAbertura from "../periodo-fechamento-abertura/PeriodoFec
 import ReaberturaCadastro from "../periodo-fechamento-reabertura/ReaberturaCadastro";
 import ReaberturaLista from "../periodo-fechamento-reabertura/ReaberturaLista";
 import PeriodosEscolares from "../periodos-escolares/PeriodosEscolares";
+import TipoCalendarioCadastro from "../tipo-calendario/TipoCalendarioCadastro";
+import TipoCalendarioListagem from "../tipo-calendario/TipoCalendarioListagem";
+import { TipoEventosListagem } from "../tipo-evento/TipoEventosListagem";
+import { TipoEventosFormulario } from "../tipo-evento-formulario/TipoEventoFormulario";
+import TipoFeriadoLista from "../tipo-feriado/TipoFeriadoLista";
 import type { RootState } from "../../types/redux";
 import "../../estilos.css";
 
@@ -50,6 +55,7 @@ const Calendario = ({ apiUrl }: CalendarioProps) => {
         {tela === "evento-cadastro" && (
           <EventosCadastro key={`evento-cadastro-${versaoEndereco}`} />
         )}
+        {tela === "tipo-feriado" && <TipoFeriadoLista key={`feriados-${versaoEndereco}`} />}
         {tela === "periodos-escolares" && (
           <PeriodosEscolares key={`periodos-${versaoEndereco}`} />
         )}
@@ -61,6 +67,18 @@ const Calendario = ({ apiUrl }: CalendarioProps) => {
         )}
         {tela === "periodo-fechamento-reabertura-cadastro" && (
           <ReaberturaCadastro key={`cadastro-${versaoEndereco}`} />
+        )}
+        {tela === "tipo-calendario-escolar" && (
+          <TipoCalendarioListagem key={`tipo-calendario-${versaoEndereco}`} />
+        )}
+        {tela === "tipo-eventos" && (
+          <TipoEventosListagem key={`tipo-calendario-${versaoEndereco}`} />
+        )}
+        {tela === "tipo-eventos-formulario" && (
+          <TipoEventosFormulario key={`tipo-evento-form-${versaoEndereco}`} />
+        )}
+        {tela === "tipo-calendario-escolar-cadastro" && (
+          <TipoCalendarioCadastro key={`tipo-calendario-form-${versaoEndereco}`} />
         )}
         {!tela && <p>Tela de calendário não encontrada para esta rota.</p>}
       </div>

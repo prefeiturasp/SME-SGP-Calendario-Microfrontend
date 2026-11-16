@@ -1,6 +1,13 @@
+import path from "node:path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "~": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   esbuild: {
     jsx: "automatic",
   },
@@ -14,8 +21,10 @@ export default defineConfig({
         "src/core/**/*.ts",
         "src/services/**/*.ts",
         "src/config.ts",
+        "src/mocks/tipoFeriadoMock.ts",
+        "src/paginas/tipo-feriado/**/*.tsx",
       ],
-      exclude: ["src/**/*.test.ts"],
+      exclude: ["src/**/*.test.{ts,tsx}"],
     },
   },
 });

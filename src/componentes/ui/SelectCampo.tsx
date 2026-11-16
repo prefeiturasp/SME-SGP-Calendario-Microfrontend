@@ -1,4 +1,5 @@
 import { Select, Spin } from "antd";
+import {textoDoCampo} from "../../core/utils";
 
 type Opcao = Record<string, unknown>;
 
@@ -18,6 +19,7 @@ export const SelectCampo = ({
   permiteLimpar,
   erro,
   onChange,
+  allowClear,
 }: {
   id: string;
   label?: string;
@@ -34,6 +36,7 @@ export const SelectCampo = ({
   permiteLimpar?: boolean;
   erro?: string;
   onChange: (valor: string | string[]) => void;
+  allowClear?: boolean;
 }) => (
   <div className={erro ? "campo-invalido" : undefined}>
     {label && (
@@ -50,13 +53,13 @@ export const SelectCampo = ({
         disabled={disabled}
         mode={multiple ? "multiple" : undefined}
         showSearch={showSearch}
-        allowClear={permiteLimpar}
+        allowClear={allowClear ?? permiteLimpar}
         optionFilterProp="label"
         value={value || undefined}
         options={lista.map((item) => ({
-          value: String(item[valueOption] ?? ""),
-          label: String(item[valueText] ?? ""),
-        }))}
+        value: textoDoCampo(item[valueOption]),
+        label: textoDoCampo(item[valueText]),
+      }))}
         onChange={(selecionado) => onChange((selecionado ?? "") as string | string[])}
       />
     </Spin>

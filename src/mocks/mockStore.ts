@@ -10,6 +10,12 @@ const estadoInicial: RootState = {
     possuiPerfilDre: false,
     rf: "0000001",
     permissoes: {
+      "/calendario-escolar/tipo-feriado": {
+        podeConsultar: true,
+        podeIncluir: true,
+        podeAlterar: true,
+        podeExcluir: true,
+      },
       "/calendario-escolar/periodos-escolares": {
         podeConsultar: true,
         podeIncluir: true,
@@ -23,6 +29,12 @@ const estadoInicial: RootState = {
         podeExcluir: true,
       },
       "/calendario-escolar/periodo-fechamento-reabertura": {
+        podeConsultar: true,
+        podeIncluir: true,
+        podeAlterar: true,
+        podeExcluir: true,
+      },
+      "/calendario-escolar/tipo-calendario-escolar": {
         podeConsultar: true,
         podeIncluir: true,
         podeAlterar: true,
