@@ -9,8 +9,8 @@ import { Cabecalho } from "../../componentes/ui/Cabecalho";
 import { CampoData } from "../../componentes/ui/CampoData";
 import { Loader } from "../../componentes/ui/Loader";
 import { SelectAutocomplete } from "../../componentes/ui/SelectAutocomplete";
-import { confirmar, exibirErrosApi, sucesso } from "../../core/config/alertas";
-import { ROTAS, comoLista, ehCalendarioAnual, type TipoCalendario } from "../../core/constantes";
+import { confirmar, sucesso } from "../../core/config/alertas";
+import { ROTAS, ehCalendarioAnual, type TipoCalendario } from "../../core/constantes";
 import { diasEntre, paraDia, type ValorData } from "../../core/datas";
 import {
   aplicarDatasNoFechamento,
@@ -19,9 +19,10 @@ import {
 } from "../../core/regras/fechamentoAbertura";
 import { verificaSomenteConsulta } from "../../core/sessao";
 import { esquemaFechamentoAbertura } from "../../core/validacao/esquemaDatas";
-import { calendarioService } from "../../services/calendarioService";
-import { periodoFechamentoService } from "../../services/periodoFechamentoService";
 import type { RootState } from "../../types/redux";
+
+// import { calendarioService } from "../../services/calendarioService";
+// import { periodoFechamentoService } from "../../services/periodoFechamentoService";
 
 type Formulario = FormikProps<Record<string, unknown>>;
 
@@ -35,6 +36,61 @@ const vazio = (): FechamentoAbertura => ({
 
 const chaveInicio = (bimestre: number) => `bimestre${bimestre}InicioDoFechamento`;
 const chaveFim = (bimestre: number) => `bimestre${bimestre}FinalDoFechamento`;
+
+const tiposCalendarioMockados: TipoCalendario[] = [
+  {
+    id: 1,
+    descricao: "Calendário Fundamental/Médio 2026",
+    periodo: 1,
+    modalidade: 1,
+    anoLetivo: 2026,
+  },
+  {
+    id: 2,
+    descricao: "Calendário EJA 2026 - 1º semestre",
+    periodo: 2,
+    modalidade: 2,
+    anoLetivo: 2026,
+  },
+  {
+    id: 3,
+    descricao: "Calendário Infantil 2026",
+    periodo: 1,
+    modalidade: 3,
+    anoLetivo: 2026,
+  },
+];
+
+const fechamentoMockado = (
+  tipoCalendarioId: number,
+  bimestres: number[],
+  migrado = false,
+): FechamentoAbertura => ({
+  id: tipoCalendarioId + 100,
+  tipoCalendarioId,
+  periodoEscolarId: tipoCalendarioId + 200,
+  migrado,
+  criadoPor: "Usuário de demonstração",
+  criadoRF: "1234567",
+  criadoEm: "2026-01-05T10:00:00",
+  fechamentosBimestres: bimestres.map((bimestre) => {
+    const inicioMinimo = `2026-${String(1 + (bimestre - 1) * 3).padStart(2, "0")}-01`;
+    const finalMaximo = `2026-${String(Math.min(bimestre * 3, 12)).padStart(2, "0")}-${bimestre === 4 ? "31" : "30"}`;
+    return {
+      bimestre,
+      inicioDoFechamento: `2026-${String(1 + (bimestre - 1) * 3).padStart(2, "0")}-10`,
+      finalDoFechamento: `2026-${String(1 + (bimestre - 1) * 3).padStart(2, "0")}-20`,
+      inicioMinimo,
+      finalMaximo,
+    };
+  }),
+});
+
+const fechamentosMockadosIniciais: Record<number, FechamentoAbertura> = {
+  1: fechamentoMockado(1, [1, 2, 3, 4], true),
+  2: fechamentoMockado(2, [1, 2]),
+  3: fechamentoMockado(3, [1, 2, 3, 4]),
+};
 
 const montarFormulario = (dados: FechamentoAbertura) => {
   const formulario: FechamentoAbertura = {
@@ -66,6 +122,9 @@ const PeriodoFechamentoAbertura = () => {
   const [fechamento, setFechamento] = useState<FechamentoAbertura>(vazio());
   const [registroMigrado, setRegistroMigrado] = useState(false);
   const [auditoria, setAuditoria] = useState<FechamentoAbertura>(vazio());
+  const [fechamentosMockados, setFechamentosMockados] = useState<
+    Record<number, FechamentoAbertura>
+  >(() => fechamentosMockadosIniciais);
 
   const idRegistro = Number(fechamento.id || 0);
   const existente = idRegistro > 0;
@@ -85,21 +144,17 @@ const PeriodoFechamentoAbertura = () => {
   }, []);
 
   useEffect(() => {
-    let ativo = true;
     setCarregandoTipos(true);
-    calendarioService
-      .obterTiposCalendarioAutoComplete(pesquisa)
-      .then((resposta) => {
-        if (ativo) setLista(comoLista<TipoCalendario>(resposta.data));
-      })
-      .catch((falha) => exibirErrosApi(falha, usuario.logado))
-      .finally(() => {
-        if (ativo) setCarregandoTipos(false);
-      });
-    return () => {
-      ativo = false;
-    };
-  }, [pesquisa, usuario.logado]);
+    // Dados de calendário mockados enquanto a integração com a API está desativada.
+    // const resposta = await calendarioService.obterTiposCalendarioAutoComplete(pesquisa);
+    const termo = pesquisa.trim().toLocaleLowerCase();
+    setLista(
+      tiposCalendarioMockados.filter((tipo) =>
+        tipo.descricao.toLocaleLowerCase().includes(termo),
+      ),
+    );
+    setCarregandoTipos(false);
+  }, [pesquisa]);
 
   const carregar = useCallback(() => {
     setModoEdicao(false);
@@ -108,24 +163,19 @@ const PeriodoFechamentoAbertura = () => {
       return;
     }
     setProcessando(true);
-    periodoFechamentoService
-      .obterPorTipoCalendario(tipoId)
-      .then((resposta) => {
-        if (resposta.data?.fechamentosBimestres) {
-          const dados = montarFormulario(resposta.data);
-          setFechamento(dados);
-          setRegistroMigrado(!!resposta.data.migrado);
-          setAuditoria(resposta.data);
-        } else {
-          limpar();
-        }
-      })
-      .catch((falha) => {
-        limpar();
-        exibirErrosApi(falha, usuario.logado);
-      })
-      .finally(() => setProcessando(false));
-  }, [limpar, tipoId, usuario.logado]);
+    // Dados de abertura mockados enquanto a integração com a API está desativada.
+    // const resposta = await periodoFechamentoService.obterPorTipoCalendario(tipoId);
+    const dados = fechamentosMockados[Number(tipoId)];
+    if (dados?.fechamentosBimestres) {
+      const formulario = montarFormulario(dados);
+      setFechamento(formulario);
+      setRegistroMigrado(!!dados.migrado);
+      setAuditoria(dados);
+    } else {
+      limpar();
+    }
+    setProcessando(false);
+  }, [fechamentosMockados, limpar, tipoId]);
 
   useEffect(() => {
     carregar();
@@ -146,17 +196,32 @@ const PeriodoFechamentoAbertura = () => {
       ).map((item) => ({ ...item })),
     });
     setProcessando(true);
-    try {
-      await periodoFechamentoService.salvar(payload);
-      sucesso("Períodos salvos com sucesso.");
-      setModoEdicao(false);
-      carregar();
-      if (voltar) navigate("/");
-    } catch (falha) {
-      exibirErrosApi(falha, usuario.logado);
-    } finally {
-      setProcessando(false);
-    }
+    // A chamada de gravação permanece aqui para reativar a integração com a API.
+    // await periodoFechamentoService.salvar(payload);
+    const idMockado =
+      payload.id && payload.id > 0
+        ? payload.id
+        : Math.max(100, ...Object.values(fechamentosMockados).map((item) => item.id || 0)) +
+          1;
+    const dadosAtualizados: FechamentoAbertura = {
+      ...payload,
+      id: idMockado,
+      tipoCalendarioId: Number(tipoId),
+      alteradoPor: "Usuário de demonstração",
+      alteradoRF: "1234567",
+      alteradoEm: new Date().toISOString(),
+    };
+    setFechamentosMockados((atuais) => ({
+      ...atuais,
+      [Number(tipoId)]: dadosAtualizados,
+    }));
+    setFechamento(montarFormulario(dadosAtualizados));
+    setAuditoria(dadosAtualizados);
+    setRegistroMigrado(!!dadosAtualizados.migrado);
+    setModoEdicao(false);
+    sucesso("Períodos salvos com sucesso.");
+    setProcessando(false);
+    if (voltar) navigate("/");
   };
 
   const validarESalvar = async (form: Formulario, voltar = false) => {
@@ -223,7 +288,7 @@ const PeriodoFechamentoAbertura = () => {
             </Cabecalho>
             <section className="calendario-card">
               <div className="linha-filtros-reversa">
-                <div style={{ minWidth: 280, flex: 1 }}>
+                <div style={{ width: "100%", maxWidth: 420 }}>
                   <Loader loading={carregandoTipos}>
                     <SelectAutocomplete
                       id="tipoCalendarioId"
@@ -237,6 +302,10 @@ const PeriodoFechamentoAbertura = () => {
                       onSelect={selecionar}
                       onChange={selecionar}
                       handleSearch={(texto) => {
+                        if (lista.some((tipo) => tipo.descricao === texto)) {
+                          setPesquisa("");
+                          return;
+                        }
                         if (texto.length > 3 || texto.length === 0) setPesquisa(texto);
                       }}
                     />
