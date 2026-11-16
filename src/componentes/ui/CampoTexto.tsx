@@ -1,7 +1,21 @@
 import { Input } from "antd";
 import type { FormikProps } from "formik";
 
-type Formulario = FormikProps<Record<string, unknown>>;
+export type TFormulario = FormikProps<Record<string, unknown>>;
+
+type TCampoTextoProps = {
+  form: TFormulario;
+  name: string;
+  label: string;
+  id?: string;
+  maxlength?: number;
+  placeholder?: string;
+  desabilitado?: boolean;
+  labelRequired?: boolean;
+  onChange?: (textValue: string) => void;
+  rows?: number;
+}
+
 
 export const CampoTexto = ({
   form,
@@ -11,15 +25,10 @@ export const CampoTexto = ({
   desabilitado,
   labelRequired,
   onChange,
-}: {
-  form: Formulario;
-  name: string;
-  label: string;
-  id?: string;
-  desabilitado?: boolean;
-  labelRequired?: boolean;
-  onChange?: () => void;
-}) => {
+  maxlength,
+  placeholder,
+  rows = 3,
+}: TCampoTextoProps) => {
   const mensagem = form.touched[name] ? (form.errors[name] as string | undefined) : undefined;
   return (
     <div className={mensagem ? "campo-invalido" : undefined}>
@@ -29,14 +38,17 @@ export const CampoTexto = ({
       </label>
       <Input.TextArea
         id={id || name}
-        rows={3}
+        rows={rows}
         disabled={desabilitado}
         value={String(form.values[name] ?? "")}
         onChange={(evento) => {
           form.setFieldValue(name, evento.target.value);
           form.setFieldTouched(name, true, false);
-          onChange?.();
+          onChange?.(evento.target.value);
         }}
+        placeholder={placeholder}
+        maxLength={maxlength}
+        style={{ resize: "none" }}
       />
       {mensagem && <div className="campo-erro">{mensagem}</div>}
     </div>
