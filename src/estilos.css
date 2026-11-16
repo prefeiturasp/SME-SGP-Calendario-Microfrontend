@@ -3,6 +3,8 @@
   --cinza-botao: #A4A4A4;
   --cinza-desabilitado: #DADADA;
   --cinza-mako: #42474A;
+  --roxo: #6933FF;
+  --vermelho: #B40C02;
 }
 
 .calendario-pagina {
@@ -68,8 +70,8 @@
 }
 
 .btn-roxo {
-  border-color: #6933ff;
-  color: #6933ff;
+  border-color: var(--roxo);
+  color: var(--roxo);
 }
 
 .btn-azul {
@@ -80,14 +82,14 @@
 }
 
 .btn-vermelho {
-  border-color: #b40c02;
-  color: #b40c02;
+  border-color: var(--vermelho);
+  color: var(--vermelho);
   width: 38px;
   padding: 8px;
 }
 
 .btn-roxo:hover:not(:disabled) {
-  background: #6933ff;
+  background: var(--roxo);
   color: #fff;
 }
 
@@ -97,7 +99,7 @@
 }
 
 .btn-vermelho:hover:not(:disabled) {
-  background: #b40c02;
+  background: var(--vermelho);
   color: #fff;
 }
 
@@ -125,12 +127,12 @@
 }
 
 .campo-obrigatorio {
-  color: #b40c02;
+  color: var(--vermelho);
   margin-left: 4px;
 }
 
 .campo-erro {
-  color: #b40c02;
+  color: var(--vermelho);
   font-size: 12px;
   margin-top: 4px;
 }
@@ -138,12 +140,12 @@
 .campo-invalido .ant-select-selector,
 .campo-invalido .ant-picker,
 .campo-invalido .ant-input {
-  border-color: #b40c02 !important;
+  border-color: var(--vermelho) !important;
 }
 
 .registro-migrado {
-  background-color: #6933ff;
-  border: solid 0.5px #6933ff;
+  background-color: var(--roxo);
+  border: solid 0.5px var(--roxo);
   border-radius: 3px;
   color: #fff;
   font-size: 11px;
@@ -205,4 +207,14 @@
   max-height: 25px;
   max-width: 15px;
   padding: 1rem;
+}
+
+/* Tipo de Evento Formulário */
+
+.div-tipo-evento-formulario .ant-radio-checked .ant-radio-inner {
+  border-color: var(--roxo);
+}
+
+.div-tipo-evento-formulario .ant-radio-inner::after {
+  background-color: var(--roxo);
 }

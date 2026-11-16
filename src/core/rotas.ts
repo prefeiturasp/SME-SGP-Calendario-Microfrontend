@@ -8,7 +8,8 @@ export type TelaCalendario =
   | "periodo-fechamento-reabertura-cadastro"
   | "tipo-calendario-escolar"
   | "tipo-calendario-escolar-cadastro"
-  | "tipo-eventos";
+  | "tipo-eventos"
+  | "tipo-eventos-formulario";
 
 export const resolverTela = (pathname: string): TelaCalendario | null => {
   const caminho = pathname.replace(/\/+$/, "") || "/";
@@ -42,6 +43,13 @@ export const resolverTela = (pathname: string): TelaCalendario | null => {
     caminho.startsWith(`${ROTAS.PERIODO_FECHAMENTO_REABERTURA}/`)
   ) {
     return "periodo-fechamento-reabertura";
+  }
+
+  if (
+    caminho === `${ROTAS.TIPO_EVENTOS}/novo` ||
+    caminho.startsWith(`${ROTAS.TIPO_EVENTOS}/editar/`)
+  ) {
+    return "tipo-eventos-formulario";
   }
 
   if (
