@@ -4,6 +4,8 @@ export type UsuarioState = {
   dataHoraExpiracao?: string;
   possuiPerfilSme?: boolean;
   possuiPerfilSmeOuDre?: boolean;
+  possuiPerfilDre?: boolean;
+  rf?: string;
   acessoAdmin?: boolean;
   permissoes?: Record<
     string,

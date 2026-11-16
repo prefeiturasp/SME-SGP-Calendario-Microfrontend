@@ -45,7 +45,19 @@ describe("resolverTela", () => {
     expect(resolverTela(`${ROTAS.TIPO_EVENTOS}/editar/3`)).toBe("tipo-eventos-formulario");
   });
 
+  it("encaminha a lista de eventos, com ou sem tipo de calendário", () => {
+    expect(resolverTela(ROTAS.EVENTOS)).toBe("eventos");
+    expect(resolverTela(`${ROTAS.EVENTOS}/`)).toBe("eventos");
+    expect(resolverTela(`${ROTAS.EVENTOS}/10`)).toBe("eventos");
+  });
+
+  it("encaminha o cadastro de eventos (novo e edição)", () => {
+    expect(resolverTela(`${ROTAS.EVENTOS}/novo/1`)).toBe("evento-cadastro");
+    expect(resolverTela(`${ROTAS.EVENTOS}/editar/5`)).toBe("evento-cadastro");
+    expect(resolverTela(`${ROTAS.EVENTOS}/editar/5/1`)).toBe("evento-cadastro");
+  });
+
   it("ignora rotas de calendário fora desta etapa", () => {
-    expect(resolverTela("/calendario-escolar/eventos")).toBeNull();
+    expect(resolverTela("/calendario-escolar/tipo-eventos")).toBeNull();
   });
 });

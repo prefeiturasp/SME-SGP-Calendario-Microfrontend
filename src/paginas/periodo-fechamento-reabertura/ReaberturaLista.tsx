@@ -287,6 +287,8 @@ const ReaberturaLista = () => {
         {filtroValido && (
           <div style={{ marginTop: 20 }}>
             <ListaPaginada
+              id="lista-fechamento-reaberturas"
+              buscar={fechamentoReaberturaService.listar}
               filtro={filtro}
               filtroEhValido={filtroValido}
               colunas={colunas}

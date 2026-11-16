@@ -24,11 +24,19 @@ export const Botao = ({
   titulo,
   ariaLabel,
 }: BotaoProps) => {
+  const className = [
+    "btn-acao",
+    !disabled && `btn-${cor}`,
+    label && "btn-com-texto",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   const botao = (
     <button
       type="button"
       id={id}
-      className={`btn-acao${disabled ? "" : ` btn-${cor}`}`}
+      className={className}
       disabled={disabled}
       title={titulo}
       aria-label={ariaLabel ?? titulo}

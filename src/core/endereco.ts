@@ -2,11 +2,11 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ROTAS } from "./constantes";
 
 export const lerParametros = (pathname: string) => {
-  const editar = pathname.match(/\/editar\/([^/]+)/);
+  const editar = pathname.match(/\/editar\/([^/]+)(?:\/([^/]+))?/);
   const novo = pathname.match(/\/novo\/([^/]+)/);
   return {
     id: editar?.[1],
-    tipoCalendarioId: novo?.[1],
+    tipoCalendarioId: novo?.[1] ?? editar?.[2],
   };
 };
 
@@ -19,6 +19,7 @@ export const caminhoEfetivo = (pathnameDoRouter: string) => {
 
 const resolverPeloEndereco = (pathname: string) => {
   return (
+    pathname.includes("/calendario-escolar/eventos") ||
     pathname.replace(/\/+$/, "") === ROTAS.TIPO_FERIADO ||
     pathname.includes("/calendario-escolar/periodos-escolares") ||
     pathname.includes("/calendario-escolar/periodo-fechamento-abertura") ||

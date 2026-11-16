@@ -1,6 +1,8 @@
 import { ROTAS } from "./constantes";
 
 export type TelaCalendario =
+  | "eventos"
+  | "evento-cadastro"
   | "tipo-feriado"
   | "periodos-escolares"
   | "periodo-fechamento-abertura"
@@ -45,6 +47,14 @@ export const resolverTela = (pathname: string): TelaCalendario | null => {
     return "periodo-fechamento-reabertura";
   }
 
+  if (caminho === ROTAS.EVENTOS) return "eventos";
+
+  if (caminho.startsWith(`${ROTAS.EVENTOS}/`)) {
+    const [segmento] = caminho.slice(ROTAS.EVENTOS.length + 1).split("/");
+    if (segmento === "novo" || segmento === "editar") return "evento-cadastro";
+    return "eventos";
+  }
+  
   if (
     caminho === `${ROTAS.TIPO_EVENTOS}/novo` ||
     caminho.startsWith(`${ROTAS.TIPO_EVENTOS}/editar/`)

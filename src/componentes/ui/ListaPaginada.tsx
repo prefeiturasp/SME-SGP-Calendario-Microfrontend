@@ -2,15 +2,31 @@ import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
 import { exibirErrosApi } from "../../core/config/alertas";
-import { fechamentoReaberturaService } from "../../services/fechamentoReaberturaService";
+
+type RespostaLista = { data?: { items?: unknown[]; totalRegistros?: number } };
+
+export type BuscarLista = (
+  pagina: number,
+  tamanho: number,
+  filtro: Record<string, unknown>,
+) => Promise<RespostaLista>;
 
 export const ListaPaginada = ({
+  buscar,
+  id = "lista-fechamento-reaberturas",
+  multiSelecao = true,
+  recarregar = 0,
   filtro,
   filtroEhValido,
   colunas,
   onClick,
   onSelecionar,
 }: {
+  buscar: BuscarLista;
+  id?: string;
+  multiSelecao?: boolean;
+  /** Muda para forçar nova consulta com o mesmo filtro (ex.: após excluir). */
+  recarregar?: number;
   filtro: Record<string, unknown>;
   filtroEhValido: boolean;
   colunas: ColumnsType<Record<string, unknown>>;
@@ -41,8 +57,7 @@ export const ListaPaginada = ({
     setCarregando(true);
     setSelecionadas([]);
     onSelecionar([]);
-    fechamentoReaberturaService
-      .listar(pagina, tamanho, filtro)
+    buscar(pagina, tamanho, filtro)
       .then((resposta) => {
         if (!ativo) return;
         const items = (resposta.data?.items || []) as unknown as Record<string, unknown>[];
@@ -59,11 +74,11 @@ export const ListaPaginada = ({
     return () => {
       ativo = false;
     };
-  }, [filtroEhValido, filtroSerializado, pagina, tamanho]);
+  }, [filtroEhValido, filtroSerializado, pagina, tamanho, recarregar]);
 
   return (
     <Table
-      id="lista-fechamento-reaberturas"
+      id={id}
       rowKey="id"
       bordered
       size="middle"
@@ -71,13 +86,17 @@ export const ListaPaginada = ({
       columns={colunas}
       dataSource={linhas}
       locale={{ emptyText: "Sem dados" }}
-      rowSelection={{
-        selectedRowKeys: selecionadas,
-        onChange: (chaves, registros) => {
-          setSelecionadas(chaves as Array<string | number>);
-          onSelecionar(registros);
-        },
-      }}
+      rowSelection={
+        multiSelecao
+          ? {
+              selectedRowKeys: selecionadas,
+              onChange: (chaves, registros) => {
+                setSelecionadas(chaves as Array<string | number>);
+                onSelecionar(registros);
+              },
+            }
+          : undefined
+      }
       onRow={(registro) => ({
         onClick: (evento) => {
           const alvo = evento.target as HTMLElement;

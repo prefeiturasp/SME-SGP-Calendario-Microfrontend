@@ -33,6 +33,17 @@ vi.mock("../../services/abrangenciaService", () => ({
   },
 }));
 
+vi.mock("../../services/eventoService", () => ({
+  eventoService: {
+    obterTiposCalendario: vi.fn().mockResolvedValue({ data: [] }),
+    buscarDres: vi.fn().mockResolvedValue({ data: [] }),
+    buscarUes: vi.fn().mockResolvedValue({ data: [] }),
+    obterTiposEvento: vi.fn().mockResolvedValue({ data: { items: [] } }),
+    listar: vi.fn().mockResolvedValue({ data: { items: [], totalRegistros: 0 } }),
+    deletar: vi.fn().mockResolvedValue({ status: 200, data: [] }),
+  },
+}));
+
 const renderizar = (rota: string) =>
   render(
     <Provider store={createMockStore()}>
@@ -51,6 +62,10 @@ describe("Calendario", () => {
   });
 
   it.each([
+    ["/calendario-escolar/eventos", "Eventos do calendário escolar (Micro frontend)"],
+    ["/calendario-escolar/eventos/10", "Eventos do calendário escolar (Micro frontend)"],
+    ["/calendario-escolar/eventos/novo/1", "Cadastro de eventos do calendário escolar (Micro frontend)"],
+    ["/calendario-escolar/eventos/editar/5/1", "Cadastro de eventos do calendário escolar (Micro frontend)"],
     ["/calendario-escolar/tipo-feriado", "Lista de tipo de feriado"],
     ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar (Micro frontend)"],
     [
