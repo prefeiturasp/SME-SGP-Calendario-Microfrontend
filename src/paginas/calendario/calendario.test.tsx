@@ -67,7 +67,7 @@ describe("Calendario", () => {
     ["/calendario-escolar/eventos/novo/1", "Cadastro de eventos do calendário escolar (Micro frontend)"],
     ["/calendario-escolar/eventos/editar/5/1", "Cadastro de eventos do calendário escolar (Micro frontend)"],
     ["/calendario-escolar/tipo-feriado", "Lista de tipo de feriado"],
-    ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar (Micro frontend)"],
+    ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar"],
     [
       "/calendario-escolar/periodo-fechamento-abertura",
       "Período de Fechamento (Abertura) (Micro frontend)",

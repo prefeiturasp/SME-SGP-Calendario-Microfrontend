@@ -1,0 +1,65 @@
+.periodos-escolares .campo-label {
+  display: flex;
+  align-items: baseline;
+  font-weight: 700;
+}
+
+.periodos-escolares .campo-obrigatorio {
+  order: -1;
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.periodos-escolares-bimestres {
+  margin-top: 24px;
+}
+
+.periodos-escolares-colunas {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.periodos-escolares-linha {
+  margin-bottom: 8px;
+}
+
+.periodos-escolares .caixa-bimestre {
+  box-sizing: border-box;
+  min-height: 38px;
+  margin-bottom: 0;
+  padding: 8px;
+}
+
+.periodos-escolares .ant-picker {
+  min-height: 38px;
+}
+
+.periodos-escolares-label-data {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .periodos-escolares-colunas {
+    display: none;
+  }
+
+  .periodos-escolares-label-data {
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .periodos-escolares-linha {
+    margin-bottom: 20px;
+  }
+}
