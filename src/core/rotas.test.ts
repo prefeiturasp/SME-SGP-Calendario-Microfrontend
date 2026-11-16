@@ -38,6 +38,13 @@ describe("resolverTela", () => {
     );
   });
 
+  it("encaminha a listagem e o formulário de tipo de eventos", () => {
+    expect(resolverTela(ROTAS.TIPO_EVENTOS)).toBe("tipo-eventos");
+    expect(resolverTela(`${ROTAS.TIPO_EVENTOS}/novo`)).toBe("tipo-eventos-formulario");
+    expect(resolverTela(`${ROTAS.TIPO_EVENTOS}/novo/`)).toBe("tipo-eventos-formulario");
+    expect(resolverTela(`${ROTAS.TIPO_EVENTOS}/editar/3`)).toBe("tipo-eventos-formulario");
+  });
+
   it("ignora rotas de calendário fora desta etapa", () => {
     expect(resolverTela("/calendario-escolar/eventos")).toBeNull();
   });

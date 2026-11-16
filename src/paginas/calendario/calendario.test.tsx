@@ -77,6 +77,7 @@ describe("Calendario", () => {
       "/calendario-escolar/tipo-calendario-escolar/editar/1",
       "Alterar Tipo de Calendário Escolar",
     ],
+    ["/calendario-escolar/tipo-eventos/novo", "Cadastro de Tipo de Eventos"],
   ])("exibe %s", async (rota, titulo) => {
     renderizar(rota);
     expect(await screen.findByRole("heading", { name: titulo })).toBeTruthy();
