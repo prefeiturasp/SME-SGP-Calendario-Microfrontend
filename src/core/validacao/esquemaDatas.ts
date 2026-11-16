@@ -51,25 +51,28 @@ const campoPeriodo = (
   };
 };
 
-export const esquemaPeriodosEscolares = (anual: boolean) =>
+export const esquemaPeriodosEscolares = (
+  anual: boolean,
+  { validarSequencia = true }: { validarSequencia?: boolean } = {},
+) =>
   Yup.object().shape({
     ...campoPeriodo("primeiroBimestreDataInicial", "primeiroBimestreDataFinal"),
     ...campoPeriodo(
       "segundoBimestreDataInicial",
       "segundoBimestreDataFinal",
-      "primeiroBimestreDataFinal",
+      validarSequencia ? "primeiroBimestreDataFinal" : undefined,
     ),
     ...(anual
       ? {
           ...campoPeriodo(
             "terceiroBimestreDataInicial",
             "terceiroBimestreDataFinal",
-            "segundoBimestreDataFinal",
+            validarSequencia ? "segundoBimestreDataFinal" : undefined,
           ),
           ...campoPeriodo(
             "quartoBimestreDataInicial",
             "quartoBimestreDataFinal",
-            "terceiroBimestreDataFinal",
+            validarSequencia ? "terceiroBimestreDataFinal" : undefined,
           ),
         }
       : {}),

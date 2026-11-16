@@ -52,7 +52,7 @@ describe("Calendario", () => {
 
   it.each([
     ["/calendario-escolar/tipo-feriado", "Lista de tipo de feriado"],
-    ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar (Micro frontend)"],
+    ["/calendario-escolar/periodos-escolares", "Cadastro do período escolar"],
     [
       "/calendario-escolar/periodo-fechamento-abertura",
       "Período de Fechamento (Abertura) (Micro frontend)",

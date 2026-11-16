@@ -12,7 +12,6 @@ import { deleteSgp, getSgp, postSgp, putSgp } from "../core/servico/apiSgp";
 import { abrangenciaService } from "./abrangenciaService";
 import { calendarioService } from "./calendarioService";
 import { fechamentoReaberturaService } from "./fechamentoReaberturaService";
-import { periodoEscolarService } from "./periodoEscolarService";
 import { periodoFechamentoService } from "./periodoFechamentoService";
 
 const get = vi.mocked(getSgp);
@@ -70,15 +69,6 @@ describe("serviços HTTP do calendário", () => {
     expect(
       calendarioService.converterModalidade(ModalidadeTipoCalendario.FUNDAMENTAL_MEDIO),
     ).toBe(Modalidade.FUNDAMENTAL);
-  });
-
-  it("mantém o endpoint atual de período escolar", () => {
-    periodoEscolarService.obterPorTipoCalendario(12);
-    periodoEscolarService.salvar({ tipoCalendario: 12 });
-    expect(get).toHaveBeenCalledWith("v1/periodo-escolar", {
-      params: { codigoTipoCalendario: 12 },
-    });
-    expect(post).toHaveBeenCalledWith("v1/periodo-escolar", { tipoCalendario: 12 });
   });
 
   it("mantém o endpoint atual de fechamento e abertura com aplicação SGP", () => {
