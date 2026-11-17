@@ -1,0 +1,72 @@
+import { Provider } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createMockStore } from "./mocks/mockStore";
+import Calendario from "./paginas/calendario/calendario";
+
+const store = createMockStore();
+
+const App = () => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/calendario-escolar/tipo-feriado" element={<Calendario />} />
+        <Route path="/calendario-escolar/periodos-escolares" element={<Calendario />} />
+        <Route
+          path="/calendario-escolar/periodo-fechamento-abertura"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/periodo-fechamento-reabertura"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/periodo-fechamento-reabertura/novo"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/periodo-fechamento-reabertura/novo/:tipoCalendarioId"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/periodo-fechamento-reabertura/editar/:id"
+          element={<Calendario />}
+        />
+        <Route path="/calendario-escolar/eventos" element={<Calendario />} />
+        <Route path="/calendario-escolar/eventos/:tipoCalendarioId" element={<Calendario />} />
+        <Route path="/calendario-escolar/eventos/novo/:tipoCalendarioId" element={<Calendario />} />
+        <Route path="/calendario-escolar/eventos/editar/:id" element={<Calendario />} />
+        <Route
+          path="/calendario-escolar/eventos/editar/:id/:tipoCalendarioId"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-eventos"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-eventos/novo"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-eventos/editar/:id"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-calendario-escolar"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-calendario-escolar/novo"
+          element={<Calendario />}
+        />
+        <Route
+          path="/calendario-escolar/tipo-calendario-escolar/editar/:id"
+          element={<Calendario />}
+        />
+        <Route path="*" element={<Calendario />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
+);
+
+export default App;

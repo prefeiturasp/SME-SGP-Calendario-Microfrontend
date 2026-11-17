@@ -1,0 +1,134 @@
+.calendario-tipo-feriado .tipo-feriado-filtros {
+  display: grid;
+  grid-template-columns: 4fr 3fr 5fr;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.calendario-tipo-feriado .tipo-feriado-select {
+  position: relative;
+}
+
+.calendario-tipo-feriado .ant-select {
+  width: 100%;
+}
+
+.calendario-tipo-feriado .tipo-feriado-limpar {
+  position: absolute;
+  right: 28px;
+  top: 2px;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  background: #fff;
+  color: #42474a;
+  cursor: pointer;
+}
+
+.calendario-tipo-feriado .ant-table-thead > tr > th {
+  background: #f5f6f8 !important;
+  color: #42474a;
+}
+
+.calendario-tipo-feriado .ant-table-cell {
+  color: #42474a;
+}
+
+.calendario-tipo-feriado .tipo-feriado-nome {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.calendario-tipo-feriado .tipo-feriado-nome:hover {
+  text-decoration: underline;
+}
+
+.calendario-tipo-feriado .tipo-feriado-nome:focus-visible {
+  outline-color: currentColor;
+}
+
+.calendario-tipo-feriado .ant-table-bordered .ant-table-container,
+.calendario-tipo-feriado .ant-table-bordered .ant-table-cell {
+  border-color: #d8d8d8;
+}
+
+/* Tooltip do Ant Design transfere a classe do botão desabilitado para um span. */
+.calendario-tipo-feriado .btn-vermelho.ant-tooltip-disabled-compatible-wrapper {
+  display: inline-flex !important;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border-color: #d8d8d8;
+  background: #f5f6f8;
+  color: #bdbdbd;
+}
+
+.calendario-tipo-feriado .btn-vermelho.ant-tooltip-disabled-compatible-wrapper > button {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+.calendario-tipo-feriado .ant-table-tbody > tr.ant-table-row-selected > td,
+.calendario-tipo-feriado .ant-table-tbody > tr.ant-table-row-selected:hover > td {
+  background: #6933ff;
+  color: #fff;
+}
+
+.calendario-tipo-feriado .ant-checkbox-checked .ant-checkbox-inner,
+.calendario-tipo-feriado .ant-pagination-item-active {
+  background-color: #6933ff;
+  border-color: #6933ff;
+}
+
+.calendario-tipo-feriado .ant-checkbox-indeterminate .ant-checkbox-inner::after {
+  background-color: #6933ff;
+}
+
+.calendario-tipo-feriado .ant-table-row-selected .ant-checkbox-inner {
+  border-color: #fff;
+}
+
+.calendario-tipo-feriado .ant-pagination-item,
+.calendario-tipo-feriado .ant-pagination-prev,
+.calendario-tipo-feriado .ant-pagination-next {
+  min-width: 45px;
+  height: 45px;
+  line-height: 43px;
+  margin-inline-end: 0;
+  border: 1px solid #d8d8d8;
+  border-radius: 0;
+}
+
+.calendario-tipo-feriado .ant-pagination-item-active a {
+  color: #fff;
+}
+
+.calendario-tipo-feriado button:focus-visible {
+  outline: 2px solid #086397;
+  outline-offset: 2px;
+}
+
+@media (max-width: 767px) {
+  .calendario-tipo-feriado .tipo-feriado-filtros {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .calendario-tipo-feriado .tipo-feriado-tabela {
+    overflow-x: auto;
+  }
+
+  .calendario-tipo-feriado .ant-table {
+    min-width: 600px;
+  }
+}

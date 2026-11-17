@@ -1,0 +1,84 @@
+import { ROTAS } from "./constantes";
+
+export type TelaCalendario =
+  | "eventos"
+  | "evento-cadastro"
+  | "tipo-feriado"
+  | "periodos-escolares"
+  | "periodo-fechamento-abertura"
+  | "periodo-fechamento-reabertura"
+  | "periodo-fechamento-reabertura-cadastro"
+  | "tipo-calendario-escolar"
+  | "tipo-calendario-escolar-cadastro"
+  | "tipo-eventos"
+  | "tipo-eventos-formulario";
+
+export const resolverTela = (pathname: string): TelaCalendario | null => {
+  const caminho = pathname.replace(/\/+$/, "") || "/";
+
+  if (caminho === ROTAS.TIPO_FERIADO) return "tipo-feriado";
+
+  if (
+    caminho === ROTAS.PERIODOS_ESCOLARES ||
+    caminho.startsWith(`${ROTAS.PERIODOS_ESCOLARES}/`)
+  ) {
+    return "periodos-escolares";
+  }
+
+  if (
+    caminho === ROTAS.PERIODO_FECHAMENTO_ABERTURA ||
+    caminho.startsWith(`${ROTAS.PERIODO_FECHAMENTO_ABERTURA}/`)
+  ) {
+    return "periodo-fechamento-abertura";
+  }
+
+  if (caminho.startsWith(`${ROTAS.PERIODO_FECHAMENTO_REABERTURA}/novo`)) {
+    return "periodo-fechamento-reabertura-cadastro";
+  }
+
+  if (caminho.startsWith(`${ROTAS.PERIODO_FECHAMENTO_REABERTURA}/editar`)) {
+    return "periodo-fechamento-reabertura-cadastro";
+  }
+
+  if (
+    caminho === ROTAS.PERIODO_FECHAMENTO_REABERTURA ||
+    caminho.startsWith(`${ROTAS.PERIODO_FECHAMENTO_REABERTURA}/`)
+  ) {
+    return "periodo-fechamento-reabertura";
+  }
+
+  if (caminho === ROTAS.EVENTOS) return "eventos";
+
+  if (caminho.startsWith(`${ROTAS.EVENTOS}/`)) {
+    const [segmento] = caminho.slice(ROTAS.EVENTOS.length + 1).split("/");
+    if (segmento === "novo" || segmento === "editar") return "evento-cadastro";
+    return "eventos";
+  }
+  
+  if (
+    caminho === `${ROTAS.TIPO_EVENTOS}/novo` ||
+    caminho.startsWith(`${ROTAS.TIPO_EVENTOS}/editar/`)
+  ) {
+    return "tipo-eventos-formulario";
+  }
+
+  if (
+    caminho === ROTAS.TIPO_EVENTOS ||
+    caminho.startsWith(`${ROTAS.TIPO_EVENTOS}/`)
+  ) {
+    return "tipo-eventos";
+  }
+
+  if (
+    caminho === `${ROTAS.TIPO_CALENDARIO_ESCOLAR}/novo` ||
+    caminho.startsWith(`${ROTAS.TIPO_CALENDARIO_ESCOLAR}/editar/`)
+  ) {
+    return "tipo-calendario-escolar-cadastro";
+  }
+
+  if (caminho === ROTAS.TIPO_CALENDARIO_ESCOLAR) {
+    return "tipo-calendario-escolar";
+  }
+
+  return null;
+};
